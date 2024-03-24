@@ -31,6 +31,7 @@ endif
 ifeq ($(UNAME_OS),Linux)
 	PLATFORM := linux
 endif
+
 # Buf will be cached to ~/.cache/medtechchain-protos
 CACHE_BASE := $(HOME)/.cache/$(PROJECT)
 # This allows switching between i.e a Docker container and your local setup without overwriting.
@@ -115,20 +116,18 @@ $(PROTOC_GEN_GRPC_JAVA):
 .DEFAULT_GOAL := javabindings
 
 # deps allows us to install deps without running any checks.
-
 .PHONY: deps
 deps: $(BUF) $(PROTOC) $(PROTOC_GEN_DOC) $(PROTOC_GEN_GRPC_JAVA)
 
-# local is what we run when testing locally.
+# lint is what we run when testing locally.
 # This does breaking change detection against our local git repository.
-
 .PHONY: lint
 lint: $(BUF) $(PROTOC)
 	buf lint
 	buf breaking --against '.git#branch=main'
 
 .PHONY: genprotos
-genprotos:  deps
+genprotos: deps
 	buf generate --template buf.gen.yaml
 
 .PHONY: javabindings
@@ -136,7 +135,6 @@ javabindings: genprotos
 	cd bindings/java && gradle build
 
 # clean deletes any files not checked in and the cache for all platforms.
-
 .PHONY: clean
 clean:
 	git clean -xdf
@@ -146,7 +144,6 @@ cleandep:
 	rm -rf $(CACHE_BASE)
 
 # For updating this repository
-
 .PHONY: updateversion
 updateversion:
 ifndef VERSION
