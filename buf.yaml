@@ -1,0 +1,12 @@
+version: v1
+build:
+  excludes:
+    - bindings
+lint:
+  use:
+    - DEFAULT
+  except:
+    - PACKAGE_VERSION_SUFFIX
+breaking:
+  use:
+    - FILE

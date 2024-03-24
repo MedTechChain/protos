@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-group = 'nl.medtechchain'
+group = 'nl.medtechchain.protos'
 version = '1.0-SNAPSHOT'
 
 repositories {

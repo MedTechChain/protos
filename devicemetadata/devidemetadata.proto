@@ -6,9 +6,6 @@ package devicemetadata;
 
 option java_package = "nl.medtechchain.protos.devicemetadata";
 
-// Not sure if java outer classname is needed
-// option java_outer_classname = "DeviceMetadata";
-
 message BedsideMonitor {
   string device_manufacturer = 1;
 
