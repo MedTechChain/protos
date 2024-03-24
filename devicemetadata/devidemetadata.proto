@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package devicemetadata;
+
+option java_package = "nl.medtechchain.protos.devicemetadata";
+
+// Not sure if java outer classname is needed
+// option java_outer_classname = "DeviceMetadata";
+
+message BedsideMonitor {
+  string device_manufacturer = 1;
+
+  string device_serial_number = 2;
+
+  int32 software_version = 3;
+
+  string udi_device_name = 4;
+
+  google.protobuf.Timestamp timestamp = 5;
+
+  bool has_ecg_module = 6;
+
+  bool has_resp_module = 7;
+
+  bool has_spo2_module = 8;
+
+  bool has_nibp_module = 9;
+
+  bool has_temp_module = 10;
+
+  bool has_2_channel_invbp_module = 11;
+
+  bool has_sidestream_co2_module = 12;
+
+  bool has_entropy_module = 13;
+
+  bool has_sidestream_n2o_module = 14;
+
+  bool has_neuromuscular_transmission_module = 15;
+
+  bool has_cardiac_output_module = 16;
+}
+
+message WearableDevice {
+  string device_manufacturer = 1;
+
+  string device_serial_number = 2;
+
+  string udi_device_name = 3;
+
+  int32 software_version = 4;
+
+  google.protobuf.Timestamp timestamp = 5;
+
+  bool has_heart_rate_sensor = 6;
+
+  bool has_accelerometer = 7;
+
+  bool has_gyroscope = 8;
+
+  bool has_barometric = 9;
+
+  bool has_microphone = 10;
+
+  bool has_magnetometer = 11;
+
+  bool has_temperature_sensor = 12;
+
+  bool has_gps = 13;
+}
