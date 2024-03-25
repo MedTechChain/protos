@@ -5,7 +5,9 @@
 
 - [devicemetadata/devidemetadata.proto](#devicemetadata_devidemetadata-proto)
     - [BedsideMonitor](#devicemetadata-BedsideMonitor)
+    - [BedsideMonitorEncrypted](#devicemetadata-BedsideMonitorEncrypted)
     - [WearableDevice](#devicemetadata-WearableDevice)
+    - [WearableDeviceEncrypted](#devicemetadata-WearableDeviceEncrypted)
   
 - [Scalar Value Types](#scalar-value-types)
 
@@ -48,6 +50,36 @@
 
 
 
+<a name="devicemetadata-BedsideMonitorEncrypted"></a>
+
+### BedsideMonitorEncrypted
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| device_manufacturer | [string](#string) |  |  |
+| device_serial_number | [string](#string) |  |  |
+| software_version | [string](#string) |  |  |
+| udi_device_name | [string](#string) |  |  |
+| timestamp | [string](#string) |  |  |
+| has_ecg_module | [string](#string) |  |  |
+| has_resp_module | [string](#string) |  |  |
+| has_spo2_module | [string](#string) |  |  |
+| has_nibp_module | [string](#string) |  |  |
+| has_temp_module | [string](#string) |  |  |
+| has_2_channel_invbp_module | [string](#string) |  |  |
+| has_sidestream_co2_module | [string](#string) |  |  |
+| has_entropy_module | [string](#string) |  |  |
+| has_sidestream_n2o_module | [string](#string) |  |  |
+| has_neuromuscular_transmission_module | [string](#string) |  |  |
+| has_cardiac_output_module | [string](#string) |  |  |
+
+
+
+
+
+
 <a name="devicemetadata-WearableDevice"></a>
 
 ### WearableDevice
@@ -69,6 +101,33 @@
 | has_magnetometer | [bool](#bool) |  |  |
 | has_temperature_sensor | [bool](#bool) |  |  |
 | has_gps | [bool](#bool) |  |  |
+
+
+
+
+
+
+<a name="devicemetadata-WearableDeviceEncrypted"></a>
+
+### WearableDeviceEncrypted
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| device_manufacturer | [string](#string) |  |  |
+| device_serial_number | [string](#string) |  |  |
+| udi_device_name | [string](#string) |  |  |
+| software_version | [string](#string) |  |  |
+| timestamp | [string](#string) |  |  |
+| has_heart_rate_sensor | [string](#string) |  |  |
+| has_accelerometer | [string](#string) |  |  |
+| has_gyroscope | [string](#string) |  |  |
+| has_barometric | [string](#string) |  |  |
+| has_microphone | [string](#string) |  |  |
+| has_magnetometer | [string](#string) |  |  |
+| has_temperature_sensor | [string](#string) |  |  |
+| has_gps | [string](#string) |  |  |
 
 
 
