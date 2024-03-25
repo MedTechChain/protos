@@ -132,7 +132,7 @@ genprotos: deps
 
 .PHONY: javabindings
 javabindings: genprotos
-	cd bindings/java && gradle build
+	cd bindings/java && ./gradlew build
 
 # clean deletes any files not checked in and the cache for all platforms.
 .PHONY: clean
