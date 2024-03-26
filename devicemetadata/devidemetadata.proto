@@ -6,7 +6,8 @@ package devicemetadata;
 
 option java_package = "nl.medtechchain.protos.devicemetadata";
 
-message BedsideMonitor {
+// Utilities for hospitals, do not need to be considered in the production
+message BedsideMonitorUtil {
   string device_manufacturer = 1;
 
   string device_serial_number = 2;
@@ -40,7 +41,7 @@ message BedsideMonitor {
   bool has_cardiac_output_module = 16;
 }
 
-message WearableDevice {
+message WearableDeviceUtil {
   string device_manufacturer = 1;
 
   string device_serial_number = 2;
@@ -68,7 +69,8 @@ message WearableDevice {
   bool has_gps = 13;
 }
 
-message BedsideMonitorEncrypted {
+// Data types that will be persisted inside the blockchain (encrypted)
+message BedsideMonitor {
   string device_manufacturer = 1;
 
   string device_serial_number = 2;
@@ -102,7 +104,7 @@ message BedsideMonitorEncrypted {
   string has_cardiac_output_module = 16;
 }
 
-message WearableDeviceEncrypted {
+message WearableDevice {
   string device_manufacturer = 1;
 
   string device_serial_number = 2;
@@ -128,4 +130,32 @@ message WearableDeviceEncrypted {
   string has_temperature_sensor = 12;
 
   string has_gps = 13;
+}
+
+enum QueryType {
+  COUNT = 0;
+  AVERAGE = 1;
+  HISTOGRAM = 2;
+}
+
+enum DeviceType {
+  BEDSIDE_MONITOR = 0;
+  WEARABLE_DEVICE = 1;
+}
+
+message Query {
+  QueryType query_type = 1;
+  DeviceType device_type = 2;
+  string field = 3;
+  optional string value = 4;
+}
+
+enum EncryptionScheme {
+  PAILLIER_2048 = 0;
+  PAILLIER_4096 = 1;
+}
+
+message EncryptionSchemeList {
+  repeated EncryptionScheme encryption_schemeList = 1;
+  EncryptionScheme current_encryption_scheme = 2;
 }
