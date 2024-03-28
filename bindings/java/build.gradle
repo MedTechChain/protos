@@ -11,9 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.grpc:grpc-bom:1.62.2'
-    implementation 'io.grpc:grpc-protobuf:1.62.2'
-    implementation 'io.grpc:grpc-stub:1.62.2'
+    implementation "com.google.protobuf:protobuf-java:4.26.1"
 }
 
 jar {

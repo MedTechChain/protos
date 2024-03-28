@@ -6,13 +6,13 @@ SHELL := /usr/bin/env bash -o pipefail
 PROJECT := medtechchain-protos
 
 # This controls the version of buf to install and use.
-BUF_VERSION := 1.25.1
+BUF_VERSION := 1.30.0
 # If true, Buf is installed from source instead of from releases
 BUF_INSTALL_FROM_SOURCE := false
 
-PROTOC_VERSION := 23.4
+PROTOC_VERSION := 26.1
 PROTOC_GEN_DOC_VERSION := 1.5.1
-PROTOC_GEN_GRPC_JAVA_VERSION := 1.57.1
+PROTOC_GEN_GRPC_JAVA_VERSION := 1.62.2
 
 ### Everything below this line is meant to be static, i.e. only adjust the above variables. ###
 
