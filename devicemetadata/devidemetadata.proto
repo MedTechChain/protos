@@ -52,34 +52,22 @@ message EncryptedFrequency {
 }
 
 message EncryptedPortableDeviceMetadata {
-  string speciality = 1;
-
+  string medical_speciality = 1;
   string manufacturer_name = 2;
-
   string operating_system = 3;
-
   string operating_system_version = 4;
-
   optional string price_aquired = 5;
-
   optional string price_rental = 6;
-
   EncryptedFrequency usage_frequency = 7;
 }
 
 message EncryptedWearableDeviceMetadata {
-  string speciality = 1;
-
+  string medical_speciality = 1;
   string manufacturer_name = 2;
-
   string operating_system = 3;
-
   string operating_system_version = 4;
-
   optional string price_aquired = 5;
-
   optional string price_rental = 6;
-
   EncryptedFrequency data_sync_frequency = 7;
 }
 
