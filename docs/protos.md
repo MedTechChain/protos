@@ -4,10 +4,24 @@
 ## Table of Contents
 
 - [devicemetadata/devidemetadata.proto](#devicemetadata_devidemetadata-proto)
-    - [BedsideMonitor](#devicemetadata-BedsideMonitor)
-    - [BedsideMonitorEncrypted](#devicemetadata-BedsideMonitorEncrypted)
-    - [WearableDevice](#devicemetadata-WearableDevice)
-    - [WearableDeviceEncrypted](#devicemetadata-WearableDeviceEncrypted)
+    - [EncryptedDeviceMetadata](#devicemetadata-EncryptedDeviceMetadata)
+    - [EncryptedFrequency](#devicemetadata-EncryptedFrequency)
+    - [EncryptedPortableDeviceMetadata](#devicemetadata-EncryptedPortableDeviceMetadata)
+    - [EncryptedWearableDeviceMetadata](#devicemetadata-EncryptedWearableDeviceMetadata)
+    - [EncryptionMetadata](#devicemetadata-EncryptionMetadata)
+    - [EncryptionSchemeList](#devicemetadata-EncryptionSchemeList)
+    - [Filter](#devicemetadata-Filter)
+    - [FilterList](#devicemetadata-FilterList)
+    - [HospitalList](#devicemetadata-HospitalList)
+    - [Query](#devicemetadata-Query)
+    - [QueryResult](#devicemetadata-QueryResult)
+  
+    - [DeviceType](#devicemetadata-DeviceType)
+    - [EncryptionScheme](#devicemetadata-EncryptionScheme)
+    - [FrequencyUnit](#devicemetadata-FrequencyUnit)
+    - [Hospital](#devicemetadata-Hospital)
+    - [QueryType](#devicemetadata-QueryType)
+    - [Speciality](#devicemetadata-Speciality)
   
 - [Scalar Value Types](#scalar-value-types)
 
@@ -20,120 +34,279 @@
 
 
 
-<a name="devicemetadata-BedsideMonitor"></a>
+<a name="devicemetadata-EncryptedDeviceMetadata"></a>
 
-### BedsideMonitor
+### EncryptedDeviceMetadata
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| device_manufacturer | [string](#string) |  |  |
-| device_serial_number | [string](#string) |  |  |
-| software_version | [int32](#int32) |  |  |
-| udi_device_name | [string](#string) |  |  |
+| type | [DeviceType](#devicemetadata-DeviceType) |  |  |
+| udi | [string](#string) |  |  |
 | timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
-| has_ecg_module | [bool](#bool) |  |  |
-| has_resp_module | [bool](#bool) |  |  |
-| has_spo2_module | [bool](#bool) |  |  |
-| has_nibp_module | [bool](#bool) |  |  |
-| has_temp_module | [bool](#bool) |  |  |
-| has_2_channel_invbp_module | [bool](#bool) |  |  |
-| has_sidestream_co2_module | [bool](#bool) |  |  |
-| has_entropy_module | [bool](#bool) |  |  |
-| has_sidestream_n2o_module | [bool](#bool) |  |  |
-| has_neuromuscular_transmission_module | [bool](#bool) |  |  |
-| has_cardiac_output_module | [bool](#bool) |  |  |
+| encryption_metadata | [EncryptionMetadata](#devicemetadata-EncryptionMetadata) |  |  |
+| metadata | [bytes](#bytes) |  |  |
 
 
 
 
 
 
-<a name="devicemetadata-BedsideMonitorEncrypted"></a>
+<a name="devicemetadata-EncryptedFrequency"></a>
 
-### BedsideMonitorEncrypted
+### EncryptedFrequency
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| device_manufacturer | [string](#string) |  |  |
-| device_serial_number | [string](#string) |  |  |
-| software_version | [string](#string) |  |  |
-| udi_device_name | [string](#string) |  |  |
-| timestamp | [string](#string) |  |  |
-| has_ecg_module | [string](#string) |  |  |
-| has_resp_module | [string](#string) |  |  |
-| has_spo2_module | [string](#string) |  |  |
-| has_nibp_module | [string](#string) |  |  |
-| has_temp_module | [string](#string) |  |  |
-| has_2_channel_invbp_module | [string](#string) |  |  |
-| has_sidestream_co2_module | [string](#string) |  |  |
-| has_entropy_module | [string](#string) |  |  |
-| has_sidestream_n2o_module | [string](#string) |  |  |
-| has_neuromuscular_transmission_module | [string](#string) |  |  |
-| has_cardiac_output_module | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+| unit | [FrequencyUnit](#devicemetadata-FrequencyUnit) |  |  |
 
 
 
 
 
 
-<a name="devicemetadata-WearableDevice"></a>
+<a name="devicemetadata-EncryptedPortableDeviceMetadata"></a>
 
-### WearableDevice
+### EncryptedPortableDeviceMetadata
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| device_manufacturer | [string](#string) |  |  |
-| device_serial_number | [string](#string) |  |  |
-| udi_device_name | [string](#string) |  |  |
-| software_version | [int32](#int32) |  |  |
-| timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
-| has_heart_rate_sensor | [bool](#bool) |  |  |
-| has_accelerometer | [bool](#bool) |  |  |
-| has_gyroscope | [bool](#bool) |  |  |
-| has_barometric | [bool](#bool) |  |  |
-| has_microphone | [bool](#bool) |  |  |
-| has_magnetometer | [bool](#bool) |  |  |
-| has_temperature_sensor | [bool](#bool) |  |  |
-| has_gps | [bool](#bool) |  |  |
+| speciality | [string](#string) |  |  |
+| manufacturer_name | [string](#string) |  |  |
+| operating_system | [string](#string) |  |  |
+| operating_system_version | [string](#string) |  |  |
+| price_aquired | [string](#string) | optional |  |
+| price_rental | [string](#string) | optional |  |
+| usage_frequency | [EncryptedFrequency](#devicemetadata-EncryptedFrequency) |  |  |
 
 
 
 
 
 
-<a name="devicemetadata-WearableDeviceEncrypted"></a>
+<a name="devicemetadata-EncryptedWearableDeviceMetadata"></a>
 
-### WearableDeviceEncrypted
+### EncryptedWearableDeviceMetadata
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| device_manufacturer | [string](#string) |  |  |
-| device_serial_number | [string](#string) |  |  |
-| udi_device_name | [string](#string) |  |  |
-| software_version | [string](#string) |  |  |
-| timestamp | [string](#string) |  |  |
-| has_heart_rate_sensor | [string](#string) |  |  |
-| has_accelerometer | [string](#string) |  |  |
-| has_gyroscope | [string](#string) |  |  |
-| has_barometric | [string](#string) |  |  |
-| has_microphone | [string](#string) |  |  |
-| has_magnetometer | [string](#string) |  |  |
-| has_temperature_sensor | [string](#string) |  |  |
-| has_gps | [string](#string) |  |  |
+| speciality | [string](#string) |  |  |
+| manufacturer_name | [string](#string) |  |  |
+| operating_system | [string](#string) |  |  |
+| operating_system_version | [string](#string) |  |  |
+| price_aquired | [string](#string) | optional |  |
+| price_rental | [string](#string) | optional |  |
+| data_sync_frequency | [EncryptedFrequency](#devicemetadata-EncryptedFrequency) |  |  |
+
+
+
+
+
+
+<a name="devicemetadata-EncryptionMetadata"></a>
+
+### EncryptionMetadata
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| scheme | [EncryptionScheme](#devicemetadata-EncryptionScheme) |  |  |
+| key_version | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="devicemetadata-EncryptionSchemeList"></a>
+
+### EncryptionSchemeList
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| encryption_schemes | [EncryptionScheme](#devicemetadata-EncryptionScheme) | repeated |  |
+| current | [EncryptionScheme](#devicemetadata-EncryptionScheme) |  |  |
+
+
+
+
+
+
+<a name="devicemetadata-Filter"></a>
+
+### Filter
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| field | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="devicemetadata-FilterList"></a>
+
+### FilterList
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filters | [Filter](#devicemetadata-Filter) | repeated |  |
+
+
+
+
+
+
+<a name="devicemetadata-HospitalList"></a>
+
+### HospitalList
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hospitals | [Hospital](#devicemetadata-Hospital) | repeated |  |
+
+
+
+
+
+
+<a name="devicemetadata-Query"></a>
+
+### Query
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| query_type | [QueryType](#devicemetadata-QueryType) |  |  |
+| device_type | [DeviceType](#devicemetadata-DeviceType) | optional |  |
+| hospitals_list | [HospitalList](#devicemetadata-HospitalList) | optional |  |
+| start_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | optional |  |
+| stop_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | optional |  |
+| filters_list | [FilterList](#devicemetadata-FilterList) | optional |  |
+| field | [string](#string) |  |  |
+| value | [string](#string) | optional |  |
+
+
+
+
+
+
+<a name="devicemetadata-QueryResult"></a>
+
+### QueryResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| query_type | [QueryType](#devicemetadata-QueryType) |  |  |
+| raw | [string](#string) |  |  |
 
 
 
 
 
  
+
+
+<a name="devicemetadata-DeviceType"></a>
+
+### DeviceType
+CHAINCODE &lt;=&gt; HOSPITALS
+**************************************************************
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| PORTABLE_DEVICE | 0 |  |
+| WEARABLE_DEVICE | 1 |  |
+
+
+
+<a name="devicemetadata-EncryptionScheme"></a>
+
+### EncryptionScheme
+ENCRYPTION
+**************************************************************
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| PAILLIER_2048 | 0 |  |
+| PAILLIER_3072 | 1 |  |
+
+
+
+<a name="devicemetadata-FrequencyUnit"></a>
+
+### FrequencyUnit
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| TIMES_PER_DAY | 0 |  |
+| TIMES_PER_WEEK | 1 |  |
+| TIMES_PER_MONTH | 2 |  |
+
+
+
+<a name="devicemetadata-Hospital"></a>
+
+### Hospital
+CHAINCODE &lt;=&gt; ADMIN/RESEARCHER
+**************************************************************
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| MEDIVALE | 0 |  |
+| HEALPOINT | 1 |  |
+| LIFECARE | 2 |  |
+
+
+
+<a name="devicemetadata-QueryType"></a>
+
+### QueryType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| COUNT | 0 |  |
+| AVERAGE | 1 |  |
+| HISTOGRAM | 2 |  |
+
+
+
+<a name="devicemetadata-Speciality"></a>
+
+### Speciality
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| ONCOLOGY | 0 |  |
+| CARDIOLOGY | 1 |  |
+| NEUROLOGY | 2 |  |
+| OTHER | 3 |  |
+
 
  
 

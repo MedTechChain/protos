@@ -6,130 +6,101 @@ package devicemetadata;
 
 option java_package = "nl.medtechchain.protos.devicemetadata";
 
-// Utilities for hospitals, do not need to be considered in the production
-message BedsideMonitorUtil {
-  string device_manufacturer = 1;
-
-  string device_serial_number = 2;
-
-  int32 software_version = 3;
-
-  string udi_device_name = 4;
-
-  google.protobuf.Timestamp timestamp = 5;
-
-  bool has_ecg_module = 6;
-
-  bool has_resp_module = 7;
-
-  bool has_spo2_module = 8;
-
-  bool has_nibp_module = 9;
-
-  bool has_temp_module = 10;
-
-  bool has_2_channel_invbp_module = 11;
-
-  bool has_sidestream_co2_module = 12;
-
-  bool has_entropy_module = 13;
-
-  bool has_sidestream_n2o_module = 14;
-
-  bool has_neuromuscular_transmission_module = 15;
-
-  bool has_cardiac_output_module = 16;
+/****************************************************************
+ENCRYPTION
+****************************************************************/
+enum EncryptionScheme {
+  PAILLIER_2048 = 0;
+  PAILLIER_3072 = 1;
 }
 
-message WearableDeviceUtil {
-  string device_manufacturer = 1;
-
-  string device_serial_number = 2;
-
-  string udi_device_name = 3;
-
-  int32 software_version = 4;
-
-  google.protobuf.Timestamp timestamp = 5;
-
-  bool has_heart_rate_sensor = 6;
-
-  bool has_accelerometer = 7;
-
-  bool has_gyroscope = 8;
-
-  bool has_barometric = 9;
-
-  bool has_microphone = 10;
-
-  bool has_magnetometer = 11;
-
-  bool has_temperature_sensor = 12;
-
-  bool has_gps = 13;
+message EncryptionSchemeList {
+  repeated EncryptionScheme encryption_schemes = 1;
+  EncryptionScheme current = 2;
 }
 
-// Data types that will be persisted inside the blockchain (encrypted)
-message BedsideMonitor {
-  string device_manufacturer = 1;
-
-  string device_serial_number = 2;
-
-  string software_version = 3;
-
-  string udi_device_name = 4;
-
-  string timestamp = 5;
-
-  string has_ecg_module = 6;
-
-  string has_resp_module = 7;
-
-  string has_spo2_module = 8;
-
-  string has_nibp_module = 9;
-
-  string has_temp_module = 10;
-
-  string has_2_channel_invbp_module = 11;
-
-  string has_sidestream_co2_module = 12;
-
-  string has_entropy_module = 13;
-
-  string has_sidestream_n2o_module = 14;
-
-  string has_neuromuscular_transmission_module = 15;
-
-  string has_cardiac_output_module = 16;
+/****************************************************************
+CHAINCODE <=> HOSPITALS
+****************************************************************/
+enum DeviceType {
+  PORTABLE_DEVICE = 0;
+  WEARABLE_DEVICE = 1;
 }
 
-message WearableDevice {
-  string device_manufacturer = 1;
+message EncryptionMetadata {
+  EncryptionScheme scheme = 1;
+  string key_version = 2;
+}
 
-  string device_serial_number = 2;
+message EncryptedDeviceMetadata {
+  DeviceType type = 1;
+  string udi = 2;
+  google.protobuf.Timestamp timestamp = 3;
+  EncryptionMetadata encryption_metadata = 4;
+  bytes metadata = 5;
+}
 
-  string udi_device_name = 3;
+enum FrequencyUnit {
+  TIMES_PER_DAY = 0;
+  TIMES_PER_WEEK = 1;
+  TIMES_PER_MONTH = 2;
+}
 
-  string software_version = 4;
+message EncryptedFrequency {
+  double value = 1;
+  FrequencyUnit unit = 2;
+}
 
-  string timestamp = 5;
+message EncryptedPortableDeviceMetadata {
+  string speciality = 1;
 
-  string has_heart_rate_sensor = 6;
+  string manufacturer_name = 2;
 
-  string has_accelerometer = 7;
+  string operating_system = 3;
 
-  string has_gyroscope = 8;
+  string operating_system_version = 4;
 
-  string has_barometric = 9;
+  optional string price_aquired = 5;
 
-  string has_microphone = 10;
+  optional string price_rental = 6;
 
-  string has_magnetometer = 11;
+  EncryptedFrequency usage_frequency = 7;
+}
 
-  string has_temperature_sensor = 12;
+message EncryptedWearableDeviceMetadata {
+  string speciality = 1;
 
-  string has_gps = 13;
+  string manufacturer_name = 2;
+
+  string operating_system = 3;
+
+  string operating_system_version = 4;
+
+  optional string price_aquired = 5;
+
+  optional string price_rental = 6;
+
+  EncryptedFrequency data_sync_frequency = 7;
+}
+
+/****************************************************************
+CHAINCODE <=> ADMIN/RESEARCHER
+****************************************************************/
+enum Hospital {
+  MEDIVALE = 0;
+  HEALPOINT = 1;
+  LIFECARE = 2;
+}
+
+enum Speciality {
+  ONCOLOGY = 0;
+  CARDIOLOGY = 1;
+  NEUROLOGY = 2;
+  OTHER = 3;
+}
+
+message HospitalList {
+  repeated Hospital hospitals = 1;
 }
 
 enum QueryType {
@@ -138,24 +109,27 @@ enum QueryType {
   HISTOGRAM = 2;
 }
 
-enum DeviceType {
-  BEDSIDE_MONITOR = 0;
-  WEARABLE_DEVICE = 1;
+message Filter {
+  string field = 1;
+  string value = 2;
+}
+
+message FilterList {
+  repeated Filter filters = 1;
 }
 
 message Query {
   QueryType query_type = 1;
-  DeviceType device_type = 2;
-  string field = 3;
-  optional string value = 4;
+  optional DeviceType device_type = 2;
+  optional HospitalList hospitals_list = 3;
+  optional google.protobuf.Timestamp start_time = 4;
+  optional google.protobuf.Timestamp stop_time = 5;
+  optional FilterList filters_list = 6;
+  string field = 7;
+  optional string value = 8;
 }
 
-enum EncryptionScheme {
-  PAILLIER_2048 = 0;
-  PAILLIER_4096 = 1;
-}
-
-message EncryptionSchemeList {
-  repeated EncryptionScheme encryption_schemeList = 1;
-  EncryptionScheme current_encryption_scheme = 2;
+message QueryResult {
+  QueryType query_type = 1;
+  string raw = 2;
 }
