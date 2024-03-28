@@ -43,8 +43,6 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | type | [DeviceType](#devicemetadata-DeviceType) |  |  |
-| udi | [string](#string) |  |  |
-| timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
 | encryption_metadata | [EncryptionMetadata](#devicemetadata-EncryptionMetadata) |  |  |
 | raw_bytes | [bytes](#bytes) |  |  |
 
@@ -77,7 +75,8 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| speciality | [string](#string) |  |  |
+| udi | [string](#string) |  |  |
+| medical_speciality | [string](#string) |  |  |
 | manufacturer_name | [string](#string) |  |  |
 | operating_system | [string](#string) |  |  |
 | operating_system_version | [string](#string) |  |  |
@@ -98,7 +97,8 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| speciality | [string](#string) |  |  |
+| udi | [string](#string) |  |  |
+| medical_speciality | [string](#string) |  |  |
 | manufacturer_name | [string](#string) |  |  |
 | operating_system | [string](#string) |  |  |
 | operating_system_version | [string](#string) |  |  |

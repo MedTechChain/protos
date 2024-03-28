@@ -34,10 +34,8 @@ message EncryptionMetadata {
 
 message EncryptedDeviceMetadata {
   DeviceType type = 1;
-  string udi = 2;
-  google.protobuf.Timestamp timestamp = 3;
-  EncryptionMetadata encryption_metadata = 4;
-  bytes raw_bytes = 5;
+  EncryptionMetadata encryption_metadata = 2;
+  bytes raw_bytes = 3;
 }
 
 enum FrequencyUnit {
@@ -52,23 +50,25 @@ message EncryptedFrequency {
 }
 
 message EncryptedPortableDeviceMetadata {
-  string medical_speciality = 1;
-  string manufacturer_name = 2;
-  string operating_system = 3;
-  string operating_system_version = 4;
-  optional string price_aquired = 5;
-  optional string price_rental = 6;
-  EncryptedFrequency usage_frequency = 7;
+  string udi = 1;
+  string medical_speciality = 2;
+  string manufacturer_name = 3;
+  string operating_system = 4;
+  string operating_system_version = 5;
+  optional string price_aquired = 6;
+  optional string price_rental = 7;
+  EncryptedFrequency usage_frequency = 8;
 }
 
 message EncryptedWearableDeviceMetadata {
-  string medical_speciality = 1;
-  string manufacturer_name = 2;
-  string operating_system = 3;
-  string operating_system_version = 4;
-  optional string price_aquired = 5;
-  optional string price_rental = 6;
-  EncryptedFrequency data_sync_frequency = 7;
+  string udi = 1;
+  string medical_speciality = 2;
+  string manufacturer_name = 3;
+  string operating_system = 4;
+  string operating_system_version = 5;
+  optional string price_aquired = 6;
+  optional string price_rental = 7;
+  EncryptedFrequency data_sync_frequency = 8;
 }
 
 /****************************************************************
