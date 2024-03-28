@@ -37,7 +37,7 @@ message EncryptedDeviceMetadata {
   string udi = 2;
   google.protobuf.Timestamp timestamp = 3;
   EncryptionMetadata encryption_metadata = 4;
-  bytes metadata = 5;
+  bytes raw_bytes = 5;
 }
 
 enum FrequencyUnit {
