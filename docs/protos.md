@@ -46,7 +46,7 @@
 | udi | [string](#string) |  |  |
 | timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
 | encryption_metadata | [EncryptionMetadata](#devicemetadata-EncryptionMetadata) |  |  |
-| metadata | [bytes](#bytes) |  |  |
+| raw_bytes | [bytes](#bytes) |  |  |
 
 
 
@@ -61,7 +61,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| value | [string](#string) |  |  |
+| value | [double](#double) |  |  |
 | unit | [FrequencyUnit](#devicemetadata-FrequencyUnit) |  |  |
 
 
