@@ -7,8 +7,8 @@
     - [Error](#common-Error)
   
 - [schema/encryption.proto](#schema_encryption-proto)
-    - [EncryptionMetadata](#encryption-EncryptionMetadata)
-    - [EncryptionSchemeList](#encryption-EncryptionSchemeList)
+    - [EncryptionKeyMetadata](#encryption-EncryptionKeyMetadata)
+    - [EncryptionSchemeTypeList](#encryption-EncryptionSchemeTypeList)
   
     - [EncryptionSchemeType](#encryption-EncryptionSchemeType)
   
@@ -78,25 +78,25 @@
 
 
 
-<a name="encryption-EncryptionMetadata"></a>
+<a name="encryption-EncryptionKeyMetadata"></a>
 
-### EncryptionMetadata
+### EncryptionKeyMetadata
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | scheme | [EncryptionSchemeType](#encryption-EncryptionSchemeType) |  |  |
-| key_version | [string](#string) |  |  |
+| version | [string](#string) |  |  |
 
 
 
 
 
 
-<a name="encryption-EncryptionSchemeList"></a>
+<a name="encryption-EncryptionSchemeTypeList"></a>
 
-### EncryptionSchemeList
+### EncryptionSchemeTypeList
 
 
 
@@ -147,7 +147,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | type | [DeviceType](#devicemetadata-DeviceType) |  |  |
-| encryption_metadata | [encryption.EncryptionMetadata](#encryption-EncryptionMetadata) |  |  |
+| encryption_key_metadata | [encryption.EncryptionKeyMetadata](#encryption-EncryptionKeyMetadata) |  |  |
 | raw_bytes | [bytes](#bytes) |  |  |
 
 

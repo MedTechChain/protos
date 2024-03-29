@@ -13,7 +13,7 @@ enum DeviceType {
 
 message EncryptedDeviceMetadata {
   DeviceType type = 1;
-  encryption.EncryptionMetadata encryption_metadata = 2;
+  encryption.EncryptionKeyMetadata encryption_key_metadata = 2;
   bytes raw_bytes = 3;
 }
 

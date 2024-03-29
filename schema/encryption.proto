@@ -9,12 +9,12 @@ enum EncryptionSchemeType {
   PAILLIER_3072 = 1;
 }
 
-message EncryptionSchemeList {
+message EncryptionSchemeTypeList {
   repeated EncryptionSchemeType encryption_scheme_type_list = 1;
   EncryptionSchemeType current = 2;
 }
 
-message EncryptionMetadata {
+message EncryptionKeyMetadata {
   EncryptionSchemeType scheme = 1;
-  string key_version = 2;
+  string version = 2;
 }
