@@ -42,10 +42,10 @@ enum QueryType {
 message Query {
   QueryType query_type = 1;
   optional devicemetadata.DeviceType device_type = 2;
-  optional HospitalList hospitals_list = 3;
+  optional HospitalList hospital_list = 3;
   optional google.protobuf.Timestamp start_time = 4;
   optional google.protobuf.Timestamp stop_time = 5;
-  optional FilterList filters_list = 6;
+  optional FilterList filter_list = 6;
   string field = 7;
   optional string value = 8;
 }
@@ -54,7 +54,7 @@ enum QueryResultType {
   COUNT_RESULT = 0;
   COUNT_ALL_RESULT = 1;
   AVERAGE_RESULT = 2;
-  ERROR_RESULT = 3;
+  ERROR = 3;
 }
 
 message CountResult {
@@ -67,8 +67,4 @@ message CountAllResult {
 
 message AverageResult {
   double result = 1;
-}
-
-message ErrorResult {
-  string message = 1;
 }

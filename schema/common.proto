@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package common;
+
+option java_package = "nl.medtechchain.protos.common";
+
+message Error {
+  string message = 1;
+}
