@@ -7,6 +7,7 @@ managed:
   java_package_prefix: nl.medtechchain.protos
   override:
     OPTIMIZE_FOR:
+      schema/common.proto: "SPEED"
       schema/encryption.proto: "SPEED"
       schema/devicemetadata.proto: "SPEED"
       schema/query.proto: "SPEED"

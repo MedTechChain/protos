@@ -3,6 +3,9 @@
 
 ## Table of Contents
 
+- [schema/common.proto](#schema_common-proto)
+    - [Error](#common-Error)
+  
 - [schema/encryption.proto](#schema_encryption-proto)
     - [EncryptionMetadata](#encryption-EncryptionMetadata)
     - [EncryptionSchemeList](#encryption-EncryptionSchemeList)
@@ -23,7 +26,6 @@
     - [CountAllResult](#query-CountAllResult)
     - [CountAllResult.ResultEntry](#query-CountAllResult-ResultEntry)
     - [CountResult](#query-CountResult)
-    - [ErrorResult](#query-ErrorResult)
     - [Filter](#query-Filter)
     - [FilterList](#query-FilterList)
     - [HospitalList](#query-HospitalList)
@@ -35,6 +37,37 @@
     - [Speciality](#query-Speciality)
   
 - [Scalar Value Types](#scalar-value-types)
+
+
+
+<a name="schema_common-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## schema/common.proto
+
+
+
+<a name="common-Error"></a>
+
+### Error
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| message | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
 
 
 
@@ -284,21 +317,6 @@
 
 
 
-<a name="query-ErrorResult"></a>
-
-### ErrorResult
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| message | [string](#string) |  |  |
-
-
-
-
-
-
 <a name="query-Filter"></a>
 
 ### Filter
@@ -355,10 +373,10 @@
 | ----- | ---- | ----- | ----------- |
 | query_type | [QueryType](#query-QueryType) |  |  |
 | device_type | [devicemetadata.DeviceType](#devicemetadata-DeviceType) | optional |  |
-| hospitals_list | [HospitalList](#query-HospitalList) | optional |  |
+| hospital_list | [HospitalList](#query-HospitalList) | optional |  |
 | start_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | optional |  |
 | stop_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | optional |  |
-| filters_list | [FilterList](#query-FilterList) | optional |  |
+| filter_list | [FilterList](#query-FilterList) | optional |  |
 | field | [string](#string) |  |  |
 | value | [string](#string) | optional |  |
 
@@ -392,7 +410,7 @@
 | COUNT_RESULT | 0 |  |
 | COUNT_ALL_RESULT | 1 |  |
 | AVERAGE_RESULT | 2 |  |
-| ERROR_RESULT | 3 |  |
+| ERROR | 3 |  |
 
 
 
