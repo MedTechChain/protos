@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "encryption.proto";
+import "schema/encryption.proto";
 
 package devicemetadata;
 
@@ -13,7 +13,7 @@ enum DeviceType {
 
 message EncryptedDeviceMetadata {
   DeviceType type = 1;
-  EncryptionMetadata encryption_metadata = 2;
+  encryption.EncryptionMetadata encryption_metadata = 2;
   bytes raw_bytes = 3;
 }
 

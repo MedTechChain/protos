@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "devicemetadata.proto";
+import "schema/devicemetadata.proto";
 import "google/protobuf/timestamp.proto";
 
 package query;
@@ -41,7 +41,7 @@ enum QueryType {
 
 message Query {
   QueryType query_type = 1;
-  optional DeviceType device_type = 2;
+  optional devicemetadata.DeviceType device_type = 2;
   optional HospitalList hospitals_list = 3;
   optional google.protobuf.Timestamp start_time = 4;
   optional google.protobuf.Timestamp stop_time = 5;
