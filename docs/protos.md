@@ -3,34 +3,105 @@
 
 ## Table of Contents
 
-- [devicemetadata/devidemetadata.proto](#devicemetadata_devidemetadata-proto)
+- [schema/encryption.proto](#schema_encryption-proto)
+    - [EncryptionMetadata](#encryption-EncryptionMetadata)
+    - [EncryptionSchemeList](#encryption-EncryptionSchemeList)
+  
+    - [EncryptionScheme](#encryption-EncryptionScheme)
+  
+- [schema/devicemetadata.proto](#schema_devicemetadata-proto)
     - [EncryptedDeviceMetadata](#devicemetadata-EncryptedDeviceMetadata)
     - [EncryptedFrequency](#devicemetadata-EncryptedFrequency)
     - [EncryptedPortableDeviceMetadata](#devicemetadata-EncryptedPortableDeviceMetadata)
     - [EncryptedWearableDeviceMetadata](#devicemetadata-EncryptedWearableDeviceMetadata)
-    - [EncryptionMetadata](#devicemetadata-EncryptionMetadata)
-    - [EncryptionSchemeList](#devicemetadata-EncryptionSchemeList)
-    - [Filter](#devicemetadata-Filter)
-    - [FilterList](#devicemetadata-FilterList)
-    - [HospitalList](#devicemetadata-HospitalList)
-    - [Query](#devicemetadata-Query)
-    - [QueryResult](#devicemetadata-QueryResult)
   
     - [DeviceType](#devicemetadata-DeviceType)
-    - [EncryptionScheme](#devicemetadata-EncryptionScheme)
     - [FrequencyUnit](#devicemetadata-FrequencyUnit)
-    - [Hospital](#devicemetadata-Hospital)
-    - [QueryType](#devicemetadata-QueryType)
-    - [Speciality](#devicemetadata-Speciality)
+  
+- [schema/query.proto](#schema_query-proto)
+    - [AverageResult](#query-AverageResult)
+    - [CountAllResult](#query-CountAllResult)
+    - [CountAllResult.ResultEntry](#query-CountAllResult-ResultEntry)
+    - [CountResult](#query-CountResult)
+    - [ErrorResult](#query-ErrorResult)
+    - [Filter](#query-Filter)
+    - [FilterList](#query-FilterList)
+    - [HospitalList](#query-HospitalList)
+    - [Query](#query-Query)
+  
+    - [Hospital](#query-Hospital)
+    - [QueryResultType](#query-QueryResultType)
+    - [QueryType](#query-QueryType)
+    - [Speciality](#query-Speciality)
   
 - [Scalar Value Types](#scalar-value-types)
 
 
 
-<a name="devicemetadata_devidemetadata-proto"></a>
+<a name="schema_encryption-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## devicemetadata/devidemetadata.proto
+## schema/encryption.proto
+
+
+
+<a name="encryption-EncryptionMetadata"></a>
+
+### EncryptionMetadata
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| scheme | [EncryptionScheme](#encryption-EncryptionScheme) |  |  |
+| key_version | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="encryption-EncryptionSchemeList"></a>
+
+### EncryptionSchemeList
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| encryption_schemes | [EncryptionScheme](#encryption-EncryptionScheme) | repeated |  |
+| current | [EncryptionScheme](#encryption-EncryptionScheme) |  |  |
+
+
+
+
+
+ 
+
+
+<a name="encryption-EncryptionScheme"></a>
+
+### EncryptionScheme
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| PAILLIER_2048 | 0 |  |
+| PAILLIER_3072 | 1 |  |
+
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="schema_devicemetadata-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## schema/devicemetadata.proto
 
 
 
@@ -43,7 +114,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | type | [DeviceType](#devicemetadata-DeviceType) |  |  |
-| encryption_metadata | [EncryptionMetadata](#devicemetadata-EncryptionMetadata) |  |  |
+| encryption_metadata | [encryption.EncryptionMetadata](#encryption-EncryptionMetadata) |  |  |
 | raw_bytes | [bytes](#bytes) |  |  |
 
 
@@ -80,8 +151,8 @@
 | manufacturer_name | [string](#string) |  |  |
 | operating_system | [string](#string) |  |  |
 | operating_system_version | [string](#string) |  |  |
-| price_aquired | [string](#string) | optional |  |
-| price_rental | [string](#string) | optional |  |
+| aquired_price | [string](#string) |  |  |
+| rental_price | [string](#string) |  |  |
 | usage_frequency | [EncryptedFrequency](#devicemetadata-EncryptedFrequency) |  |  |
 
 
@@ -102,125 +173,9 @@
 | manufacturer_name | [string](#string) |  |  |
 | operating_system | [string](#string) |  |  |
 | operating_system_version | [string](#string) |  |  |
-| price_aquired | [string](#string) | optional |  |
-| price_rental | [string](#string) | optional |  |
+| aquired_price | [string](#string) |  |  |
+| rental_price | [string](#string) |  |  |
 | data_sync_frequency | [EncryptedFrequency](#devicemetadata-EncryptedFrequency) |  |  |
-
-
-
-
-
-
-<a name="devicemetadata-EncryptionMetadata"></a>
-
-### EncryptionMetadata
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| scheme | [EncryptionScheme](#devicemetadata-EncryptionScheme) |  |  |
-| key_version | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="devicemetadata-EncryptionSchemeList"></a>
-
-### EncryptionSchemeList
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| encryption_schemes | [EncryptionScheme](#devicemetadata-EncryptionScheme) | repeated |  |
-| current | [EncryptionScheme](#devicemetadata-EncryptionScheme) |  |  |
-
-
-
-
-
-
-<a name="devicemetadata-Filter"></a>
-
-### Filter
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| field | [string](#string) |  |  |
-| value | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="devicemetadata-FilterList"></a>
-
-### FilterList
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| filters | [Filter](#devicemetadata-Filter) | repeated |  |
-
-
-
-
-
-
-<a name="devicemetadata-HospitalList"></a>
-
-### HospitalList
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| hospitals | [Hospital](#devicemetadata-Hospital) | repeated |  |
-
-
-
-
-
-
-<a name="devicemetadata-Query"></a>
-
-### Query
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| query_type | [QueryType](#devicemetadata-QueryType) |  |  |
-| device_type | [DeviceType](#devicemetadata-DeviceType) | optional |  |
-| hospitals_list | [HospitalList](#devicemetadata-HospitalList) | optional |  |
-| start_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | optional |  |
-| stop_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | optional |  |
-| filters_list | [FilterList](#devicemetadata-FilterList) | optional |  |
-| field | [string](#string) |  |  |
-| value | [string](#string) | optional |  |
-
-
-
-
-
-
-<a name="devicemetadata-QueryResult"></a>
-
-### QueryResult
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| query_type | [QueryType](#devicemetadata-QueryType) |  |  |
-| raw | [string](#string) |  |  |
 
 
 
@@ -232,26 +187,12 @@
 <a name="devicemetadata-DeviceType"></a>
 
 ### DeviceType
-CHAINCODE &lt;=&gt; HOSPITALS
-**************************************************************
+
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | PORTABLE_DEVICE | 0 |  |
 | WEARABLE_DEVICE | 1 |  |
-
-
-
-<a name="devicemetadata-EncryptionScheme"></a>
-
-### EncryptionScheme
-ENCRYPTION
-**************************************************************
-
-| Name | Number | Description |
-| ---- | ------ | ----------- |
-| PAILLIER_2048 | 0 |  |
-| PAILLIER_3072 | 1 |  |
 
 
 
@@ -267,12 +208,171 @@ ENCRYPTION
 | TIMES_PER_MONTH | 2 |  |
 
 
+ 
 
-<a name="devicemetadata-Hospital"></a>
+ 
+
+ 
+
+
+
+<a name="schema_query-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## schema/query.proto
+
+
+
+<a name="query-AverageResult"></a>
+
+### AverageResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [double](#double) |  |  |
+
+
+
+
+
+
+<a name="query-CountAllResult"></a>
+
+### CountAllResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [CountAllResult.ResultEntry](#query-CountAllResult-ResultEntry) | repeated |  |
+
+
+
+
+
+
+<a name="query-CountAllResult-ResultEntry"></a>
+
+### CountAllResult.ResultEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [int32](#int32) |  |  |
+
+
+
+
+
+
+<a name="query-CountResult"></a>
+
+### CountResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [int32](#int32) |  |  |
+
+
+
+
+
+
+<a name="query-ErrorResult"></a>
+
+### ErrorResult
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| message | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="query-Filter"></a>
+
+### Filter
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| field | [string](#string) |  |  |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="query-FilterList"></a>
+
+### FilterList
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filters | [Filter](#query-Filter) | repeated |  |
+
+
+
+
+
+
+<a name="query-HospitalList"></a>
+
+### HospitalList
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hospitals | [Hospital](#query-Hospital) | repeated |  |
+
+
+
+
+
+
+<a name="query-Query"></a>
+
+### Query
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| query_type | [QueryType](#query-QueryType) |  |  |
+| device_type | [devicemetadata.DeviceType](#devicemetadata-DeviceType) | optional |  |
+| hospitals_list | [HospitalList](#query-HospitalList) | optional |  |
+| start_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | optional |  |
+| stop_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | optional |  |
+| filters_list | [FilterList](#query-FilterList) | optional |  |
+| field | [string](#string) |  |  |
+| value | [string](#string) | optional |  |
+
+
+
+
+
+ 
+
+
+<a name="query-Hospital"></a>
 
 ### Hospital
-CHAINCODE &lt;=&gt; ADMIN/RESEARCHER
-**************************************************************
+
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
@@ -282,7 +382,21 @@ CHAINCODE &lt;=&gt; ADMIN/RESEARCHER
 
 
 
-<a name="devicemetadata-QueryType"></a>
+<a name="query-QueryResultType"></a>
+
+### QueryResultType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| COUNT_RESULT | 0 |  |
+| COUNT_ALL_RESULT | 1 |  |
+| AVERAGE_RESULT | 2 |  |
+| ERROR_RESULT | 3 |  |
+
+
+
+<a name="query-QueryType"></a>
 
 ### QueryType
 
@@ -290,12 +404,12 @@ CHAINCODE &lt;=&gt; ADMIN/RESEARCHER
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | COUNT | 0 |  |
-| AVERAGE | 1 |  |
-| HISTOGRAM | 2 |  |
+| COUNT_ALL | 1 |  |
+| AVERAGE | 2 |  |
 
 
 
-<a name="devicemetadata-Speciality"></a>
+<a name="query-Speciality"></a>
 
 ### Speciality
 
