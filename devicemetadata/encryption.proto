@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package encryption;
+
+option java_package = "nl.medtechchain.protos.encryption";
+
+enum EncryptionScheme {
+  PAILLIER_2048 = 0;
+  PAILLIER_3072 = 1;
+}
+
+message EncryptionSchemeList {
+  repeated EncryptionScheme encryption_schemes = 1;
+  EncryptionScheme current = 2;
+}
+
+message EncryptionMetadata {
+  EncryptionScheme scheme = 1;
+  string key_version = 2;
+}

@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package query;
+
+option java_package = "nl.medtechchain.protos.query";
+
+message Filter {
+  string field = 1;
+  string value = 2;
+}
+
+message FilterList {
+  repeated Filter filters = 1;
+}
+
+enum Hospital {
+  MEDIVALE = 0;
+  HEALPOINT = 1;
+  LIFECARE = 2;
+}
+
+enum Speciality {
+  ONCOLOGY = 0;
+  CARDIOLOGY = 1;
+  NEUROLOGY = 2;
+  OTHER = 3;
+}
+
+message HospitalList {
+  repeated Hospital hospitals = 1;
+}
+
+enum QueryType {
+  COUNT = 0;
+  AVERAGE = 1;
+  HISTOGRAM = 2;
+}
+
+message Query {
+  QueryType query_type = 1;
+  optional DeviceType device_type = 2;
+  optional HospitalList hospitals_list = 3;
+  optional google.protobuf.Timestamp start_time = 4;
+  optional google.protobuf.Timestamp stop_time = 5;
+  optional FilterList filters_list = 6;
+  string field = 7;
+  optional string value = 8;
+}
+
+enum QueryResponseType {
+  COUNT = 0;
+  AVERAGE = 1;
+  HISTOGRAM = 2;
+  ERROR = 3;
+}
+
+message Error {
+  string message = 1;
+}
+
+message QueryResponse {
+  QueryResponseType query_response_type = 1;
+  bytes rawBytes = 2;
+}

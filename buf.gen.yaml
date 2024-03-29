@@ -6,10 +6,10 @@ managed:
   java_multiple_files: true
   java_package_prefix: nl.medtechchain.protos
   override:
-    #JAVA_OUTER_CLASSNAME:
-    #  devicemetadata/devicemetadata.proto: DeviceMetadataProto
     OPTIMIZE_FOR:
-      devicemetadata/devicemetadata.proto: "SPEED"
+      schema/devicemetadata.proto: "SPEED"
+      schema/query.proto: "SPEED"
+      schema/encryption.proto: "SPEED"
 plugins:  # Each entry in the plugins key is a protoc plugin configuration
   - name: doc
     out: docs
