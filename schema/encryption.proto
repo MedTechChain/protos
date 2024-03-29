@@ -16,5 +16,5 @@ message EncryptionSchemeTypeList {
 
 message EncryptionKeyMetadata {
   EncryptionSchemeType scheme = 1;
-  string version = 2;
+  string id = 2;
 }
