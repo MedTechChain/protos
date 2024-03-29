@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+import "devicemetadata.proto";
 import "google/protobuf/timestamp.proto";
 
 package query;
@@ -34,8 +35,8 @@ message HospitalList {
 
 enum QueryType {
   COUNT = 0;
-  AVERAGE = 1;
-  HISTOGRAM = 2;
+  COUNT_ALL = 1;
+  AVERAGE = 2;
 }
 
 message Query {
@@ -49,18 +50,25 @@ message Query {
   optional string value = 8;
 }
 
-enum QueryResponseType {
-  COUNT = 0;
-  AVERAGE = 1;
-  HISTOGRAM = 2;
-  ERROR = 3;
+enum QueryResultType {
+  COUNT_RESULT = 0;
+  COUNT_ALL_RESULT = 1;
+  AVERAGE_RESULT = 2;
+  ERROR_RESULT = 3;
 }
 
-message Error {
+message CountResult {
+  int32 result = 1;
+}
+
+message CountAllResult {
+  map<string, int32> result = 1;
+}
+
+message AverageResult {
+  double result = 1;
+}
+
+message ErrorResult {
   string message = 1;
-}
-
-message QueryResponse {
-  QueryResponseType query_response_type = 1;
-  bytes rawBytes = 2;
 }

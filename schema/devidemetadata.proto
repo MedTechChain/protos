@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "encryption.proto";
+
 package devicemetadata;
 
 option java_package = "nl.medtechchain.protos.devicemetadata";
@@ -32,8 +34,10 @@ message EncryptedPortableDeviceMetadata {
   string manufacturer_name = 3;
   string operating_system = 4;
   string operating_system_version = 5;
-  optional string price_aquired = 6;
-  optional string price_rental = 7;
+  oneof cost {
+    string aquired_price = 6;
+    string rental_price = 7;
+  }
   EncryptedFrequency usage_frequency = 8;
 }
 
@@ -43,7 +47,9 @@ message EncryptedWearableDeviceMetadata {
   string manufacturer_name = 3;
   string operating_system = 4;
   string operating_system_version = 5;
-  optional string price_aquired = 6;
-  optional string price_rental = 7;
+  oneof cost {
+    string aquired_price = 6;
+    string rental_price = 7;
+  }
   EncryptedFrequency data_sync_frequency = 8;
 }
