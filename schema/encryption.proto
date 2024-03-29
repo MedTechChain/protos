@@ -4,17 +4,17 @@ package encryption;
 
 option java_package = "nl.medtechchain.protos.encryption";
 
-enum EncryptionScheme {
+enum EncryptionSchemeType {
   PAILLIER_2048 = 0;
   PAILLIER_3072 = 1;
 }
 
 message EncryptionSchemeList {
-  repeated EncryptionScheme encryption_schemes = 1;
-  EncryptionScheme current = 2;
+  repeated EncryptionSchemeType encryption_scheme_type_list = 1;
+  EncryptionSchemeType current = 2;
 }
 
 message EncryptionMetadata {
-  EncryptionScheme scheme = 1;
+  EncryptionSchemeType scheme = 1;
   string key_version = 2;
 }

@@ -10,7 +10,7 @@
     - [EncryptionMetadata](#encryption-EncryptionMetadata)
     - [EncryptionSchemeList](#encryption-EncryptionSchemeList)
   
-    - [EncryptionScheme](#encryption-EncryptionScheme)
+    - [EncryptionSchemeType](#encryption-EncryptionSchemeType)
   
 - [schema/devicemetadata.proto](#schema_devicemetadata-proto)
     - [EncryptedDeviceMetadata](#devicemetadata-EncryptedDeviceMetadata)
@@ -86,7 +86,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| scheme | [EncryptionScheme](#encryption-EncryptionScheme) |  |  |
+| scheme | [EncryptionSchemeType](#encryption-EncryptionSchemeType) |  |  |
 | key_version | [string](#string) |  |  |
 
 
@@ -102,8 +102,8 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| encryption_schemes | [EncryptionScheme](#encryption-EncryptionScheme) | repeated |  |
-| current | [EncryptionScheme](#encryption-EncryptionScheme) |  |  |
+| encryption_scheme_type_list | [EncryptionSchemeType](#encryption-EncryptionSchemeType) | repeated |  |
+| current | [EncryptionSchemeType](#encryption-EncryptionSchemeType) |  |  |
 
 
 
@@ -112,9 +112,9 @@
  
 
 
-<a name="encryption-EncryptionScheme"></a>
+<a name="encryption-EncryptionSchemeType"></a>
 
-### EncryptionScheme
+### EncryptionSchemeType
 
 
 | Name | Number | Description |
