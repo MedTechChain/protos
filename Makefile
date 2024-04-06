@@ -1,4 +1,4 @@
-# Taken and adapted from https://github.com/hyperledger/fabric-protos/blob/main/Makefile
+# Inspired from https://github.com/hyperledger/fabric-protos/blob/main/Makefile
 
 SHELL := /usr/bin/env bash -o pipefail
 
@@ -26,6 +26,10 @@ ifeq ($(UNAME_OS),Darwin)
 		PROTOC_ARCH := x86_64
 	endif
 else
+### For some reason this causes an error because the url becomes
+### https://github.com/protocolbuffers/protobuf/releases/download/v25.3/protoc-25.3-linux-aarch64.zip
+### instead of https://github.com/protocolbuffers/protobuf/releases/download/v25.3/protoc-25.3-linux-aarch_64.zip 
+### missing the underscore between aarch and 64
 	PROTOC_ARCH := $(UNAME_ARCH)
 endif
 ifeq ($(UNAME_OS),Linux)
@@ -134,6 +138,12 @@ genprotos: deps
 javabindings: genprotos
 	cd bindings/java && ./gradlew build
 
+.PHONY: javabindings-docker
+javabindings-docker:
+	if ! docker info >/dev/null 2>&1; then echo "ERROR: Docker is not running"; exit 1; fi
+	docker build -t medtechchain/proto-build .
+	docker run --rm --user "$(id -u):$(id -g)" -v ".:/home/ubuntu" -w /home/ubuntu medtechchain/proto-build bash -c 'make javabindings'
+
 # clean deletes any files not checked in and the cache for all platforms.
 .PHONY: clean
 clean:
@@ -142,16 +152,3 @@ clean:
 .PHONY: cleandep
 cleandep:
 	rm -rf $(CACHE_BASE)
-
-# For updating this repository
-.PHONY: updateversion
-updateversion:
-ifndef VERSION
-	$(error "VERSION must be set")
-else
-ifeq ($(UNAME_OS),Darwin)
-	sed -i '' "s/BUF_VERSION := [0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*/BUF_VERSION := $(VERSION)/g" Makefile
-else
-	sed -i "s/BUF_VERSION := [0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*/BUF_VERSION := $(VERSION)/g" Makefile
-endif
-endif
