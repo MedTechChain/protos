@@ -127,7 +127,7 @@ deps: $(BUF) $(PROTOC) $(PROTOC_GEN_DOC) $(PROTOC_GEN_GRPC_JAVA)
 # This does breaking change detection against our local git repository.
 .PHONY: lint
 lint: $(BUF) $(PROTOC)
-	buf lint --help
+	buf lint
 	buf breaking --against '.git#branch=main'
 
 .PHONY: genproto

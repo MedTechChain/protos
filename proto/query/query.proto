@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
-import "common.proto";
+import "common/common.proto";
 
 package query;
 
@@ -10,10 +10,11 @@ option java_package = "nl.medtechchain.proto.query";
 message Filter {
   message StringFilter {
     enum StringOperator {
-      EQUALS = 0;
-      CONTAINS = 1;
-      STARTS_WITH = 2;
-      ENDS_WITH = 3;
+      STRING_OPERATOR_UNSPECIFIED = 0;
+      STRING_OPERATOR_EQUALS = 1;
+      STRING_OPERATOR_CONTAINS = 2;
+      STRING_OPERATOR_STARTS_WITH = 3;
+      STRING_OPERATOR_ENDS_WITH = 4;
     }
 
     string field = 1;
@@ -23,11 +24,12 @@ message Filter {
 
   message IntFilter {
     enum IntOperator {
-      EQUALS = 0;
-      GREATER_THAN = 1;
-      LESS_THAN = 2;
-      GREATER_THAN_OR_EQUAL = 3;
-      LESS_THAN_OR_EQUAL = 4;
+      INT_OPERATOR_UNSPECIFIED = 0;
+      INT_OPERATOR_EQUALS = 1;
+      INT_OPERATOR_GREATER_THAN = 2;
+      INT_OPERATOR_LESS_THAN = 3;
+      INT_OPERATOR_GREATER_THAN_OR_EQUAL = 4;
+      INT_OPERATOR_LESS_THAN_OR_EQUAL = 5;
     }
 
     string field = 1;
@@ -37,9 +39,10 @@ message Filter {
 
   message TimestampFilter {
     enum TimestampOperator {
-      EQUALS = 0;
-      BEFORE = 1;
-      AFTER = 2;
+      TIMESTAMP_OPERATOR_UNSPECIFIED = 0;
+      TIMESTAMP_OPERATOR_EQUALS = 1;
+      TIMESTAMP_OPERATOR_BEFORE = 2;
+      TIMESTAMP_OPERATOR_AFTER = 3;
     }
 
     string field = 1;
@@ -49,7 +52,8 @@ message Filter {
 
   message BoolFilter {
     enum BoolOperator {
-      EQUALS = 0;
+      BOOL_OPERATOR_UNSPECIFIED = 0;
+      BOOL_OPERATOR_EQUALS = 1;
     }
 
     string field = 1;
@@ -67,9 +71,10 @@ message Filter {
 
 message QueryTransaction {
   enum QueryType {
-    COUNT = 0;
-    AGGREGATED_COUNT = 1;
-    AVERAGE = 2;
+    QUERY_TYPE_UNSPECIFIED = 0;
+    QUERY_TYPE_COUNT = 1;
+    QUERY_TYPE_AGGREGATED_COUNT = 2;
+    QUERY_TYPE_AVERAGE = 3;
   }
 
   string submitter = 1;

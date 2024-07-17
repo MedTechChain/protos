@@ -8,8 +8,9 @@ option java_package = "nl.medtechchain.proto.devicedata";
 
 message DeviceDataTransaction {
   enum DeviceCategory {
-    PORTABLE = 0;
-    WEARABLE = 1;
+    DEVICE_CATEGORY_UNSPECIFIED = 0;
+    DEVICE_CATEGORY_PORTABLE = 1;
+    DEVICE_CATEGORY_WEARABLE = 2;
   }
 
   message DeviceData {
@@ -27,6 +28,9 @@ message DeviceDataTransaction {
     string hospital = 12;
     string speciality = 13;
     string active_status = 14;
+    string last_sync_time = 15;
+    string sync_frequency = 16;
+    string mac_address = 17;
   }
 
   string id = 1; // hash of udi

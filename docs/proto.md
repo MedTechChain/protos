@@ -3,12 +3,12 @@
 
 ## Table of Contents
 
-- [common.proto](#common-proto)
+- [common/common.proto](#common_common-proto)
     - [ChaincodeError](#common-ChaincodeError)
   
     - [ChaincodeError.ErrorCode](#common-ChaincodeError-ErrorCode)
   
-- [config.proto](#config-proto)
+- [config/config.proto](#config_config-proto)
     - [AuditableKeyExchangeConfig](#config-AuditableKeyExchangeConfig)
     - [DifferentialPrivacyConfig](#config-DifferentialPrivacyConfig)
     - [FeatureConfig](#config-FeatureConfig)
@@ -22,13 +22,13 @@
     - [ReadPlatformConfigTransaction](#config-ReadPlatformConfigTransaction)
     - [WritePlatformConfigTransaction](#config-WritePlatformConfigTransaction)
   
-- [devicedata.proto](#devicedata-proto)
+- [devicedata/devicedata.proto](#devicedata_devicedata-proto)
     - [DeviceDataTransaction](#devicedata-DeviceDataTransaction)
     - [DeviceDataTransaction.DeviceData](#devicedata-DeviceDataTransaction-DeviceData)
   
     - [DeviceDataTransaction.DeviceCategory](#devicedata-DeviceDataTransaction-DeviceCategory)
   
-- [query.proto](#query-proto)
+- [query/query.proto](#query_query-proto)
     - [Filter](#query-Filter)
     - [Filter.BoolFilter](#query-Filter-BoolFilter)
     - [Filter.IntFilter](#query-Filter-IntFilter)
@@ -45,7 +45,7 @@
     - [Filter.TimestampFilter.TimestampOperator](#query-Filter-TimestampFilter-TimestampOperator)
     - [QueryTransaction.QueryType](#query-QueryTransaction-QueryType)
   
-- [transaction.proto](#transaction-proto)
+- [transaction/transaction.proto](#transaction_transaction-proto)
     - [EvaluateTransaction](#transaction-EvaluateTransaction)
     - [SubmitTransaction](#transaction-SubmitTransaction)
   
@@ -53,10 +53,10 @@
 
 
 
-<a name="common-proto"></a>
+<a name="common_common-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## common.proto
+## common/common.proto
 
 
 
@@ -86,29 +86,29 @@
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| UNKNOWN | 0 | Generic errors |
-| INTERNAL_ERROR | 1 |  |
-| INVALID_REQUEST | 2 |  |
-| UNAUTHENTICATED | 100 | Authentication and authorization errors |
-| PERMISSION_DENIED | 101 |  |
-| NOT_FOUND | 200 | Resource errors |
-| ALREADY_EXISTS | 201 |  |
-| TRANSACTION_FAILURE | 300 | Transaction and state errors |
-| STATE_ERROR | 301 |  |
-| INVALID_TRANSACTION | 302 |  |
-| DUPLICATE_TRANSACTION | 303 |  |
-| INVALID_ARGUMENT | 400 | Data errors |
-| DATA_INCONSISTENCY | 401 |  |
-| DATA_VALIDATION_ERROR | 402 |  |
-| NETWORK_FAILURE | 500 | Network and communication errors |
-| PEER_UNAVAILABLE | 501 |  |
-| ORDERER_UNAVAILABLE | 502 |  |
-| TIMEOUT | 503 |  |
-| LEDGER_ERROR | 600 | Ledger errors |
-| COMMIT_FAILURE | 601 |  |
-| READ_FAILURE | 602 |  |
-| WRITE_FAILURE | 603 |  |
-| CUSTOM_ERROR | 1000 | Custom application-specific errors |
+| ERROR_CODE_UNSPECIFIED | 0 | Generic errors |
+| ERROR_CODE_INTERNAL_ERROR | 1 |  |
+| ERROR_CODE_INVALID_REQUEST | 2 |  |
+| ERROR_CODE_UNAUTHENTICATED | 100 | Authentication and authorization errors |
+| ERROR_CODE_PERMISSION_DENIED | 101 |  |
+| ERROR_CODE_NOT_FOUND | 200 | Resource errors |
+| ERROR_CODE_ALREADY_EXISTS | 201 |  |
+| ERROR_CODE_TRANSACTION_FAILURE | 300 | Transaction and state errors |
+| ERROR_CODE_STATE_ERROR | 301 |  |
+| ERROR_CODE_INVALID_TRANSACTION | 302 |  |
+| ERROR_CODE_DUPLICATE_TRANSACTION | 303 |  |
+| ERROR_CODE_INVALID_ARGUMENT | 400 | Data errors |
+| ERROR_CODE_DATA_INCONSISTENCY | 401 |  |
+| ERROR_CODE_DATA_VALIDATION_ERROR | 402 |  |
+| ERROR_CODE_NETWORK_FAILURE | 500 | Network and communication errors |
+| ERROR_CODE_PEER_UNAVAILABLE | 501 |  |
+| ERROR_CODE_ORDERER_UNAVAILABLE | 502 |  |
+| ERROR_CODE_TIMEOUT | 503 |  |
+| ERROR_CODE_LEDGER_ERROR | 600 | Ledger errors |
+| ERROR_CODE_COMMIT_FAILURE | 601 |  |
+| ERROR_CODE_READ_FAILURE | 602 |  |
+| ERROR_CODE_WRITE_FAILURE | 603 |  |
+| ERROR_CODE_CUSTOM_ERROR | 1000 | Custom application-specific errors |
 
 
  
@@ -119,10 +119,10 @@
 
 
 
-<a name="config-proto"></a>
+<a name="config_config-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## config.proto
+## config/config.proto
 
 
 
@@ -320,10 +320,10 @@ QUERY
 
 
 
-<a name="devicedata-proto"></a>
+<a name="devicedata_devicedata-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## devicedata.proto
+## devicedata/devicedata.proto
 
 
 
@@ -367,6 +367,9 @@ QUERY
 | hospital | [string](#string) |  |  |
 | speciality | [string](#string) |  |  |
 | active_status | [string](#string) |  |  |
+| last_sync_time | [string](#string) |  |  |
+| sync_frequency | [string](#string) |  |  |
+| mac_address | [string](#string) |  |  |
 
 
 
@@ -382,8 +385,9 @@ QUERY
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| PORTABLE | 0 |  |
-| WEARABLE | 1 |  |
+| DEVICE_CATEGORY_UNSPECIFIED | 0 |  |
+| DEVICE_CATEGORY_PORTABLE | 1 |  |
+| DEVICE_CATEGORY_WEARABLE | 2 |  |
 
 
  
@@ -394,10 +398,10 @@ QUERY
 
 
 
-<a name="query-proto"></a>
+<a name="query_query-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## query.proto
+## query/query.proto
 
 
 
@@ -563,7 +567,8 @@ QUERY
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| EQUALS | 0 |  |
+| BOOL_OPERATOR_UNSPECIFIED | 0 |  |
+| BOOL_OPERATOR_EQUALS | 1 |  |
 
 
 
@@ -574,11 +579,12 @@ QUERY
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| EQUALS | 0 |  |
-| GREATER_THAN | 1 |  |
-| LESS_THAN | 2 |  |
-| GREATER_THAN_OR_EQUAL | 3 |  |
-| LESS_THAN_OR_EQUAL | 4 |  |
+| INT_OPERATOR_UNSPECIFIED | 0 |  |
+| INT_OPERATOR_EQUALS | 1 |  |
+| INT_OPERATOR_GREATER_THAN | 2 |  |
+| INT_OPERATOR_LESS_THAN | 3 |  |
+| INT_OPERATOR_GREATER_THAN_OR_EQUAL | 4 |  |
+| INT_OPERATOR_LESS_THAN_OR_EQUAL | 5 |  |
 
 
 
@@ -589,10 +595,11 @@ QUERY
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| EQUALS | 0 |  |
-| CONTAINS | 1 |  |
-| STARTS_WITH | 2 |  |
-| ENDS_WITH | 3 |  |
+| STRING_OPERATOR_UNSPECIFIED | 0 |  |
+| STRING_OPERATOR_EQUALS | 1 |  |
+| STRING_OPERATOR_CONTAINS | 2 |  |
+| STRING_OPERATOR_STARTS_WITH | 3 |  |
+| STRING_OPERATOR_ENDS_WITH | 4 |  |
 
 
 
@@ -603,9 +610,10 @@ QUERY
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| EQUALS | 0 |  |
-| BEFORE | 1 |  |
-| AFTER | 2 |  |
+| TIMESTAMP_OPERATOR_UNSPECIFIED | 0 |  |
+| TIMESTAMP_OPERATOR_EQUALS | 1 |  |
+| TIMESTAMP_OPERATOR_BEFORE | 2 |  |
+| TIMESTAMP_OPERATOR_AFTER | 3 |  |
 
 
 
@@ -616,9 +624,10 @@ QUERY
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| COUNT | 0 |  |
-| AGGREGATED_COUNT | 1 |  |
-| AVERAGE | 2 |  |
+| QUERY_TYPE_UNSPECIFIED | 0 |  |
+| QUERY_TYPE_COUNT | 1 |  |
+| QUERY_TYPE_AGGREGATED_COUNT | 2 |  |
+| QUERY_TYPE_AVERAGE | 3 |  |
 
 
  
@@ -629,10 +638,10 @@ QUERY
 
 
 
-<a name="transaction-proto"></a>
+<a name="transaction_transaction-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## transaction.proto
+## transaction/transaction.proto
 
 
 

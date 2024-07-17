@@ -1,11 +1,13 @@
 version: v2
+
 managed:
   enabled: true
   override:
     - file_option: java_package_prefix
       value: nl.medtechchain.proto
-    - file_option: java_package_prefix
-      value: "true"
+    - file_option: java_multiple_files
+      value: true
+      
 plugins:  # Each entry in the plugins key is a protoc plugin configuration
   - protoc_builtin: doc
     out: docs

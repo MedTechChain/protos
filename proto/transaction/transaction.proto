@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-import "config.proto";
-import "query.proto";
-import "devicedata.proto";
+import "config/config.proto";
+import "query/query.proto";
+import "devicedata/devicedata.proto";
 
 package transaction;
 

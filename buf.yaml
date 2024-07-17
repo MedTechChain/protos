@@ -1,17 +1,14 @@
 version: v2
+
 modules:
-  - path: proto/common
-  - path: proto/config
-  - path: proto/devicedata
-  - path: proto/query
-  - path: proto/transaction
+  - path: proto
 
 lint:
   use:
     - DEFAULT
-    - COMMENT_ENUM
-    - COMMENT_MESSAGE
-
+  except:
+    - PACKAGE_VERSION_SUFFIX
+    
 breaking:
   use:
     - FILE
