@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package config;
 
-option java_package = "nl.medtechchain.protos.config";
+option java_package = "nl.medtechchain.proto.config";
 
 // Each feature should have a configuration
 // The configuration will be stored on the ledger

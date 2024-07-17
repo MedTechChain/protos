@@ -1,1 +1,1 @@
-MedTech Chain protos bindings
+MedTech Chain proto bindings

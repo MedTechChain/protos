@@ -1,12 +1,17 @@
-version: v1
-build:
-  excludes:
-    - bindings
+version: v2
+modules:
+  - path: proto/common
+  - path: proto/config
+  - path: proto/devicedata
+  - path: proto/query
+  - path: proto/transaction
+
 lint:
   use:
     - DEFAULT
-  except:
-    - PACKAGE_VERSION_SUFFIX
+    - COMMENT_ENUM
+    - COMMENT_MESSAGE
+
 breaking:
   use:
     - FILE

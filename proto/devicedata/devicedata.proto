@@ -4,7 +4,7 @@ import "google/protobuf/timestamp.proto";
 
 package devicedata;
 
-option java_package = "nl.medtechchain.protos.devicedata";
+option java_package = "nl.medtechchain.proto.devicedata";
 
 message DeviceDataTransaction {
   enum DeviceCategory {

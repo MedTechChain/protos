@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-import "schema/config.proto";
-import "schema/query.proto";
-import "schema/devicedata.proto";
+import "config.proto";
+import "query.proto";
+import "devicedata.proto";
 
 package transaction;
 
-option java_package = "nl.medtechchain.protos.transaction";
+option java_package = "nl.medtechchain.proto.transaction";
 
 message EvaluateTransaction {
   oneof evaluate_transaction_type {

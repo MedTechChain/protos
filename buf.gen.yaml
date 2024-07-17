@@ -1,25 +1,19 @@
-# A configuration file used by the `buf generate` command to generate integration code for the languages of your choice
-# See https://buf.build/docs/configuration/v1/buf-gen-yaml for more information
-version: v1
+version: v2
 managed:
   enabled: true
-  java_multiple_files: true
-  java_package_prefix: nl.medtechchain.protos
   override:
-    OPTIMIZE_FOR:
-      schema/common.proto: "SPEED"
-      schema/config.proto: "SPEED"
-      schema/devicedata.proto: "SPEED"
-      schema/query.proto: "SPEED"
-      schema/transaction.proto: "SPEED"
+    - file_option: java_package_prefix
+      value: nl.medtechchain.proto
+    - file_option: java_package_prefix
+      value: "true"
 plugins:  # Each entry in the plugins key is a protoc plugin configuration
-  - name: doc
+  - protoc_builtin: doc
     out: docs
     opt:
       - markdown
-      - protos.md
+      - proto.md
     strategy: all
-  - name: java
+  - protoc_builtin: java
     out: bindings/java/src/main/java
-  - name: grpc-java
+  - protoc_builtin: grpc-java
     out: bindings/java/src/main/java

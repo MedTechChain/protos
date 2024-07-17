@@ -29,7 +29,7 @@ The repository includes a Makefile that defines several commands to facilitate d
 
 - **`make lint`**: Runs linters on the codebase to ensure compliance with coding standards and to catch syntax errors.
 
-- **`make genprotos`**: Generates Protobuf files from the `.proto` definitions.
+- **`make genproto`**: Generates Protobuf files from the `.proto` definitions.
 
 - **`make javabindings`**: Specifically generates Java bindings for the Protobuf definitions.
 

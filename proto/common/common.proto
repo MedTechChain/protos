@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package common;
 
-option java_package = "nl.medtechchain.protos.common";
+option java_package = "nl.medtechchain.proto.common";
 
 message ChaincodeError {
   enum ErrorCode {

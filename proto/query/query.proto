@@ -1,11 +1,11 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
-import "schema/common.proto";
+import "common.proto";
 
 package query;
 
-option java_package = "nl.medtechchain.protos.query";
+option java_package = "nl.medtechchain.proto.query";
 
 message Filter {
   message StringFilter {

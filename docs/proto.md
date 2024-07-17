@@ -3,12 +3,12 @@
 
 ## Table of Contents
 
-- [schema/common.proto](#schema_common-proto)
+- [common.proto](#common-proto)
     - [ChaincodeError](#common-ChaincodeError)
   
     - [ChaincodeError.ErrorCode](#common-ChaincodeError-ErrorCode)
   
-- [schema/config.proto](#schema_config-proto)
+- [config.proto](#config-proto)
     - [AuditableKeyExchangeConfig](#config-AuditableKeyExchangeConfig)
     - [DifferentialPrivacyConfig](#config-DifferentialPrivacyConfig)
     - [FeatureConfig](#config-FeatureConfig)
@@ -22,13 +22,13 @@
     - [ReadPlatformConfigTransaction](#config-ReadPlatformConfigTransaction)
     - [WritePlatformConfigTransaction](#config-WritePlatformConfigTransaction)
   
-- [schema/devicedata.proto](#schema_devicedata-proto)
+- [devicedata.proto](#devicedata-proto)
     - [DeviceDataTransaction](#devicedata-DeviceDataTransaction)
     - [DeviceDataTransaction.DeviceData](#devicedata-DeviceDataTransaction-DeviceData)
   
     - [DeviceDataTransaction.DeviceCategory](#devicedata-DeviceDataTransaction-DeviceCategory)
   
-- [schema/query.proto](#schema_query-proto)
+- [query.proto](#query-proto)
     - [Filter](#query-Filter)
     - [Filter.BoolFilter](#query-Filter-BoolFilter)
     - [Filter.IntFilter](#query-Filter-IntFilter)
@@ -45,7 +45,7 @@
     - [Filter.TimestampFilter.TimestampOperator](#query-Filter-TimestampFilter-TimestampOperator)
     - [QueryTransaction.QueryType](#query-QueryTransaction-QueryType)
   
-- [schema/transaction.proto](#schema_transaction-proto)
+- [transaction.proto](#transaction-proto)
     - [EvaluateTransaction](#transaction-EvaluateTransaction)
     - [SubmitTransaction](#transaction-SubmitTransaction)
   
@@ -53,10 +53,10 @@
 
 
 
-<a name="schema_common-proto"></a>
+<a name="common-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## schema/common.proto
+## common.proto
 
 
 
@@ -119,10 +119,10 @@
 
 
 
-<a name="schema_config-proto"></a>
+<a name="config-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## schema/config.proto
+## config.proto
 
 
 
@@ -320,10 +320,10 @@ QUERY
 
 
 
-<a name="schema_devicedata-proto"></a>
+<a name="devicedata-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## schema/devicedata.proto
+## devicedata.proto
 
 
 
@@ -394,10 +394,10 @@ QUERY
 
 
 
-<a name="schema_query-proto"></a>
+<a name="query-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## schema/query.proto
+## query.proto
 
 
 
@@ -629,10 +629,10 @@ QUERY
 
 
 
-<a name="schema_transaction-proto"></a>
+<a name="transaction-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## schema/transaction.proto
+## transaction.proto
 
 
 

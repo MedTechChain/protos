@@ -1,18 +1,18 @@
-# Inspired from https://github.com/hyperledger/fabric-protos/blob/main/Makefile
+# Inspired from https://github.com/hyperledger/fabric-proto/blob/main/Makefile
 
 SHELL := /usr/bin/env bash -o pipefail
 
 # This controls the location of the cache.
-PROJECT := medtechchain-protos
+PROJECT := medtechchain-proto
 
 # This controls the version of buf to install and use.
-BUF_VERSION := 1.30.0
+BUF_VERSION := 1.34.0
 # If true, Buf is installed from source instead of from releases
 BUF_INSTALL_FROM_SOURCE := false
 
-PROTOC_VERSION := 25.3
+PROTOC_VERSION := 27.2
 PROTOC_GEN_DOC_VERSION := 1.5.1
-PROTOC_GEN_GRPC_JAVA_VERSION := 1.62.2
+PROTOC_GEN_GRPC_JAVA_VERSION := 1.65.1
 
 ### Everything below this line is meant to be static, i.e. only adjust the above variables. ###
 
@@ -36,7 +36,7 @@ ifeq ($(UNAME_OS),Linux)
 	PLATFORM := linux
 endif
 
-# Buf will be cached to ~/.cache/medtechchain-protos
+# Buf will be cached to ~/.cache/medtechchain-proto
 CACHE_BASE := $(HOME)/.cache/$(PROJECT)
 # This allows switching between i.e a Docker container and your local setup without overwriting.
 CACHE := $(CACHE_BASE)/$(UNAME_OS)/$(UNAME_ARCH)
@@ -127,15 +127,15 @@ deps: $(BUF) $(PROTOC) $(PROTOC_GEN_DOC) $(PROTOC_GEN_GRPC_JAVA)
 # This does breaking change detection against our local git repository.
 .PHONY: lint
 lint: $(BUF) $(PROTOC)
-	buf lint
+	buf lint --help
 	buf breaking --against '.git#branch=main'
 
-.PHONY: genprotos
-genprotos: deps
+.PHONY: genproto
+genproto: deps
 	buf generate --template buf.gen.yaml
 
 .PHONY: javabindings
-javabindings: genprotos
+javabindings: genproto
 	cd bindings/java && ./gradlew build
 
 .PHONY: javabindings-docker
