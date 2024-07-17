@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "schema/config.proto";
+import "schema/query.proto";
+import "schema/devicedata.proto";
+
+package transaction;
+
+option java_package = "nl.medtechchain.protos.transaction";
+
+message EvaluateTransaction {
+  oneof evaluate_transaction_type {
+    config.ReadPlatformConfigTransaction read_platform_config_transaction = 1;
+  };
+}
+
+message SubmitTransaction {
+  oneof submit_transaction_type {
+    query.QueryTransaction query_transaction = 1;
+    devicedata.DeviceDataTransaction device_data_transaction = 2;
+    config.WritePlatformConfigTransaction write_platform_config_transaction = 3;
+  };
+}

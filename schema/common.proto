@@ -4,6 +4,49 @@ package common;
 
 option java_package = "nl.medtechchain.protos.common";
 
-message Error {
-  string message = 1;
+message ChaincodeError {
+  enum ErrorCode {
+    // Generic errors
+    UNKNOWN = 0;
+    INTERNAL_ERROR = 1;
+    INVALID_REQUEST = 2;
+
+    // Authentication and authorization errors
+    UNAUTHENTICATED = 100;
+    PERMISSION_DENIED = 101;
+
+    // Resource errors
+    NOT_FOUND = 200;
+    ALREADY_EXISTS = 201;
+
+    // Transaction and state errors
+    TRANSACTION_FAILURE = 300;
+    STATE_ERROR = 301;
+    INVALID_TRANSACTION = 302;
+    DUPLICATE_TRANSACTION = 303;
+
+    // Data errors
+    INVALID_ARGUMENT = 400;
+    DATA_INCONSISTENCY = 401;
+    DATA_VALIDATION_ERROR = 402;
+
+    // Network and communication errors
+    NETWORK_FAILURE = 500;
+    PEER_UNAVAILABLE = 501;
+    ORDERER_UNAVAILABLE = 502;
+    TIMEOUT = 503;
+
+    // Ledger errors
+    LEDGER_ERROR = 600;
+    COMMIT_FAILURE = 601;
+    READ_FAILURE = 602;
+    WRITE_FAILURE = 603;
+
+    // Custom application-specific errors
+    CUSTOM_ERROR = 1000;
+  }
+
+  ErrorCode code = 1;
+  string message = 2;
+  string details = 3;
 }

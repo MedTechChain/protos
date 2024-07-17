@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package config;
+
+option java_package = "nl.medtechchain.protos.config";
+
+// Each feature should have a configuration
+// The configuration will be stored on the ledger
+
+message PlatformConfig {
+  ParticipantConfig participant_config = 1;
+  FeatureConfig feature_config = 2;
+}
+
+// HOSPITALS NETWORK
+message ParticipantConfig {
+  message HospitalConfig {
+    string name = 1;
+    string peer_endpoint = 2;
+  }
+
+  repeated HospitalConfig hospitals_config = 1;
+}
+
+// FEATURES
+message FeatureConfig {
+  QueryConfig query_config = 1;
+  AuditableKeyExchangeConfig auditable_key_exchange_config = 2;
+}
+
+// QUERY
+message QueryConfig {
+  InputConfig input_config = 1;
+  DifferentialPrivacyConfig differential_privacy_config = 2;
+  HomomorphicEncryptionConfig homomorphic_encryption_config = 3;
+}
+
+message InputConfig {
+  repeated string valid_count_fields = 1;
+  repeated string valid_aggregated_count_fields = 2;
+  repeated string valid_average_fields = 3;
+}
+
+message DifferentialPrivacyConfig {
+  bool enabled = 1;
+  int32 epsilon = 2;
+}
+
+message HomomorphicEncryptionConfig {
+  message ThresholdPaillier {
+    int32 key_size = 1;
+    string public_key = 2;
+  }
+
+  bool enabled = 1;
+  oneof scheme {
+    ThresholdPaillier threshold_paillier = 2;
+  };
+}
+
+// AUDITING
+message AuditableKeyExchangeConfig {
+  bool enabled = 1;
+}
+
+// TRANSACTIONS
+
+message ReadPlatformConfigTransaction {
+}
+
+message WritePlatformConfigTransaction {
+  PlatformConfig platform_config = 1;
+}

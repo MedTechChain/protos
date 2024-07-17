@@ -147,7 +147,9 @@ javabindings-docker:
 # clean deletes any files not checked in and the cache for all platforms.
 .PHONY: clean
 clean:
-	git clean -xdf
+	@echo "Are you sure you want to run 'git clean -xdf'? This will delete all untracked files and directories, including ignored files."
+	@echo "Type 'yes' to proceed, or anything else to abort."
+	@read answer && [ "$$answer" = "yes" ] && git clean -xdf || echo "Aborted."
 
 .PHONY: cleandep
 cleandep:

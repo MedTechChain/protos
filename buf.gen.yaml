@@ -8,9 +8,10 @@ managed:
   override:
     OPTIMIZE_FOR:
       schema/common.proto: "SPEED"
-      schema/encryption.proto: "SPEED"
-      schema/devicemetadata.proto: "SPEED"
+      schema/config.proto: "SPEED"
+      schema/devicedata.proto: "SPEED"
       schema/query.proto: "SPEED"
+      schema/transaction.proto: "SPEED"
 plugins:  # Each entry in the plugins key is a protoc plugin configuration
   - name: doc
     out: docs

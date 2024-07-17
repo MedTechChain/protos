@@ -1,70 +1,92 @@
 syntax = "proto3";
 
-import "schema/devicemetadata.proto";
 import "google/protobuf/timestamp.proto";
+import "schema/common.proto";
 
 package query;
 
 option java_package = "nl.medtechchain.protos.query";
 
 message Filter {
-  string field = 1;
-  string value = 2;
+  message StringFilter {
+    enum StringOperator {
+      EQUALS = 0;
+      CONTAINS = 1;
+      STARTS_WITH = 2;
+      ENDS_WITH = 3;
+    }
+
+    string field = 1;
+    string value = 2;
+    StringOperator operator = 3;
+  }
+
+  message IntFilter {
+    enum IntOperator {
+      EQUALS = 0;
+      GREATER_THAN = 1;
+      LESS_THAN = 2;
+      GREATER_THAN_OR_EQUAL = 3;
+      LESS_THAN_OR_EQUAL = 4;
+    }
+
+    string field = 1;
+    int32 value = 2;
+    IntOperator operator = 3;
+  }
+
+  message TimestampFilter {
+    enum TimestampOperator {
+      EQUALS = 0;
+      BEFORE = 1;
+      AFTER = 2;
+    }
+
+    string field = 1;
+    google.protobuf.Timestamp value = 2;
+    TimestampOperator operator = 3;
+  }
+
+  message BoolFilter {
+    enum BoolOperator {
+      EQUALS = 0;
+    }
+
+    string field = 1;
+    bool value = 2;
+    BoolOperator operator = 3;
+  }
+
+  oneof filter_type {
+    StringFilter string_filter = 1;
+    IntFilter int_filter = 2;
+    TimestampFilter timestamp_filter = 3;
+    BoolFilter bool_filter = 4;
+  }
 }
 
-message FilterList {
-  repeated Filter filters = 1;
+message QueryTransaction {
+  enum QueryType {
+    COUNT = 0;
+    AGGREGATED_COUNT = 1;
+    AVERAGE = 2;
+  }
+
+  string submitter = 1;
+  string query_type = 2;
+  string field = 3;
+  repeated Filter filters = 4;
 }
 
-enum Hospital {
-  MEDIVALE = 0;
-  HEALPOINT = 1;
-  LIFECARE = 2;
-}
+message QueryResult {
+  message AggregatedCount {
+    map<string, int32> map = 1;
+  }
 
-enum Speciality {
-  ONCOLOGY = 0;
-  CARDIOLOGY = 1;
-  NEUROLOGY = 2;
-  OTHER = 3;
-}
-
-message HospitalList {
-  repeated Hospital hospitals = 1;
-}
-
-enum QueryType {
-  COUNT = 0;
-  COUNT_ALL = 1;
-  AVERAGE = 2;
-}
-
-message Query {
-  QueryType query_type = 1;
-  optional devicemetadata.DeviceType device_type = 2;
-  optional HospitalList hospital_list = 3;
-  optional google.protobuf.Timestamp start_time = 4;
-  optional google.protobuf.Timestamp stop_time = 5;
-  optional FilterList filter_list = 6;
-  string field = 7;
-  optional string value = 8;
-}
-
-enum QueryResultType {
-  COUNT_RESULT = 0;
-  COUNT_ALL_RESULT = 1;
-  AVERAGE_RESULT = 2;
-  ERROR = 3;
-}
-
-message CountResult {
-  int32 result = 1;
-}
-
-message CountAllResult {
-  map<string, int32> result = 1;
-}
-
-message AverageResult {
-  double result = 1;
+  oneof result_type {
+    int32 count_result = 1;
+    AggregatedCount aggregated_count_result = 2;
+    double average_result = 3;
+    common.ChaincodeError error = 4;
+  }
 }

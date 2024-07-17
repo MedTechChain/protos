@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package devicedata;
+
+option java_package = "nl.medtechchain.protos.devicedata";
+
+message DeviceDataTransaction {
+  enum DeviceCategory {
+    PORTABLE = 0;
+    WEARABLE = 1;
+  }
+
+  message DeviceData {
+    string udi = 1;
+    string manufacturer = 2;
+    string model = 3;
+    string firmware_version = 4;
+    string device_type = 5;
+    string device_category = 6;
+    string production_date = 7;
+    string last_service_date = 8;
+    string warranty_expiry_date = 9;
+    string usage_hours = 10;
+    string battery_level = 11;
+    string hospital = 12;
+    string speciality = 13;
+    string active_status = 14;
+  }
+
+  string id = 1; // hash of udi
+  google.protobuf.Timestamp timestamp = 2;
+  optional string encryption_version = 3;
+  DeviceData device_data = 4;
+}
+
+
