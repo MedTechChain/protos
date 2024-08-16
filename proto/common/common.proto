@@ -4,6 +4,17 @@ package common;
 
 option java_package = "nl.medtechchain.proto.common";
 
+message ChaincodeResponse {
+  oneof chaincode_response {
+    ChaincodeSuccess success = 1;
+    ChaincodeError error = 2;
+  };
+}
+
+message ChaincodeSuccess {
+  string message = 1;
+}
+
 message ChaincodeError {
   enum ErrorCode {
     // Generic errors

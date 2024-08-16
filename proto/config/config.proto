@@ -32,12 +32,12 @@ message FeatureConfig {
 message QueryConfig {
   InputConfig input_config = 1;
   DifferentialPrivacyConfig differential_privacy_config = 2;
-  HomomorphicEncryptionConfig homomorphic_encryption_config = 3;
+  EncryptionConfig encryption_config = 3;
 }
 
 message InputConfig {
   repeated string valid_count_fields = 1;
-  repeated string valid_aggregated_count_fields = 2;
+  repeated string valid_grouped_count_fields = 2;
   repeated string valid_average_fields = 3;
 }
 
@@ -46,15 +46,15 @@ message DifferentialPrivacyConfig {
   int32 epsilon = 2;
 }
 
-message HomomorphicEncryptionConfig {
-  message ThresholdPaillier {
+message EncryptionConfig {
+  message Paillier {
     int32 key_size = 1;
     string public_key = 2;
   }
 
   bool enabled = 1;
   oneof scheme {
-    ThresholdPaillier threshold_paillier = 2;
+    Paillier paillier = 2;
   };
 }
 
@@ -66,6 +66,11 @@ message AuditableKeyExchangeConfig {
 // TRANSACTIONS
 
 message ReadPlatformConfigTransaction {
+}
+
+message ReadPlatformConfigResponse {
+    PlatformConfig platform_config = 1;
+    string encryption_version = 2;
 }
 
 message WritePlatformConfigTransaction {

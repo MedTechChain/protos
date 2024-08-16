@@ -10,7 +10,7 @@ BUF_VERSION := 1.34.0
 # If true, Buf is installed from source instead of from releases
 BUF_INSTALL_FROM_SOURCE := false
 
-PROTOC_VERSION := 27.2
+PROTOC_VERSION := 25.4
 PROTOC_GEN_DOC_VERSION := 1.5.1
 PROTOC_GEN_GRPC_JAVA_VERSION := 1.65.1
 

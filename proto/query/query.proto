@@ -73,24 +73,24 @@ message QueryTransaction {
   enum QueryType {
     QUERY_TYPE_UNSPECIFIED = 0;
     QUERY_TYPE_COUNT = 1;
-    QUERY_TYPE_AGGREGATED_COUNT = 2;
+    QUERY_TYPE_GROUPED_COUNT = 2;
     QUERY_TYPE_AVERAGE = 3;
   }
 
   string submitter = 1;
-  string query_type = 2;
+  QueryType query_type = 2;
   string field = 3;
   repeated Filter filters = 4;
 }
 
 message QueryResult {
-  message AggregatedCount {
+  message GroupedCount {
     map<string, int32> map = 1;
   }
 
   oneof result_type {
     int32 count_result = 1;
-    AggregatedCount aggregated_count_result = 2;
+    GroupedCount grouped_count_result = 2;
     double average_result = 3;
     common.ChaincodeError error = 4;
   }

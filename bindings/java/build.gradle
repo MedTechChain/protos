@@ -11,9 +11,13 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.google.protobuf:protobuf-java:4.27.2'
+    implementation 'com.google.protobuf:protobuf-java:3.25.4'
 }
 
 jar {
     archiveBaseName.set('medtechchain.proto')
+}
+
+tasks.compileJava {
+    options.release.set(11)
 }

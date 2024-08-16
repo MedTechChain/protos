@@ -5,20 +5,23 @@
 
 - [common/common.proto](#common_common-proto)
     - [ChaincodeError](#common-ChaincodeError)
+    - [ChaincodeResponse](#common-ChaincodeResponse)
+    - [ChaincodeSuccess](#common-ChaincodeSuccess)
   
     - [ChaincodeError.ErrorCode](#common-ChaincodeError-ErrorCode)
   
 - [config/config.proto](#config_config-proto)
     - [AuditableKeyExchangeConfig](#config-AuditableKeyExchangeConfig)
     - [DifferentialPrivacyConfig](#config-DifferentialPrivacyConfig)
+    - [EncryptionConfig](#config-EncryptionConfig)
+    - [EncryptionConfig.Paillier](#config-EncryptionConfig-Paillier)
     - [FeatureConfig](#config-FeatureConfig)
-    - [HomomorphicEncryptionConfig](#config-HomomorphicEncryptionConfig)
-    - [HomomorphicEncryptionConfig.ThresholdPaillier](#config-HomomorphicEncryptionConfig-ThresholdPaillier)
     - [InputConfig](#config-InputConfig)
     - [ParticipantConfig](#config-ParticipantConfig)
     - [ParticipantConfig.HospitalConfig](#config-ParticipantConfig-HospitalConfig)
     - [PlatformConfig](#config-PlatformConfig)
     - [QueryConfig](#config-QueryConfig)
+    - [ReadPlatformConfigResponse](#config-ReadPlatformConfigResponse)
     - [ReadPlatformConfigTransaction](#config-ReadPlatformConfigTransaction)
     - [WritePlatformConfigTransaction](#config-WritePlatformConfigTransaction)
   
@@ -35,8 +38,8 @@
     - [Filter.StringFilter](#query-Filter-StringFilter)
     - [Filter.TimestampFilter](#query-Filter-TimestampFilter)
     - [QueryResult](#query-QueryResult)
-    - [QueryResult.AggregatedCount](#query-QueryResult-AggregatedCount)
-    - [QueryResult.AggregatedCount.MapEntry](#query-QueryResult-AggregatedCount-MapEntry)
+    - [QueryResult.GroupedCount](#query-QueryResult-GroupedCount)
+    - [QueryResult.GroupedCount.MapEntry](#query-QueryResult-GroupedCount-MapEntry)
     - [QueryTransaction](#query-QueryTransaction)
   
     - [Filter.BoolFilter.BoolOperator](#query-Filter-BoolFilter-BoolOperator)
@@ -44,10 +47,6 @@
     - [Filter.StringFilter.StringOperator](#query-Filter-StringFilter-StringOperator)
     - [Filter.TimestampFilter.TimestampOperator](#query-Filter-TimestampFilter-TimestampOperator)
     - [QueryTransaction.QueryType](#query-QueryTransaction-QueryType)
-  
-- [transaction/transaction.proto](#transaction_transaction-proto)
-    - [EvaluateTransaction](#transaction-EvaluateTransaction)
-    - [SubmitTransaction](#transaction-SubmitTransaction)
   
 - [Scalar Value Types](#scalar-value-types)
 
@@ -71,6 +70,37 @@
 | code | [ChaincodeError.ErrorCode](#common-ChaincodeError-ErrorCode) |  |  |
 | message | [string](#string) |  |  |
 | details | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="common-ChaincodeResponse"></a>
+
+### ChaincodeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| success | [ChaincodeSuccess](#common-ChaincodeSuccess) |  |  |
+| error | [ChaincodeError](#common-ChaincodeError) |  |  |
+
+
+
+
+
+
+<a name="common-ChaincodeSuccess"></a>
+
+### ChaincodeSuccess
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| message | [string](#string) |  |  |
 
 
 
@@ -157,6 +187,38 @@ AUDITING
 
 
 
+<a name="config-EncryptionConfig"></a>
+
+### EncryptionConfig
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| enabled | [bool](#bool) |  |  |
+| paillier | [EncryptionConfig.Paillier](#config-EncryptionConfig-Paillier) |  |  |
+
+
+
+
+
+
+<a name="config-EncryptionConfig-Paillier"></a>
+
+### EncryptionConfig.Paillier
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key_size | [int32](#int32) |  |  |
+| public_key | [string](#string) |  |  |
+
+
+
+
+
+
 <a name="config-FeatureConfig"></a>
 
 ### FeatureConfig
@@ -173,38 +235,6 @@ FEATURES
 
 
 
-<a name="config-HomomorphicEncryptionConfig"></a>
-
-### HomomorphicEncryptionConfig
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
-| threshold_paillier | [HomomorphicEncryptionConfig.ThresholdPaillier](#config-HomomorphicEncryptionConfig-ThresholdPaillier) |  |  |
-
-
-
-
-
-
-<a name="config-HomomorphicEncryptionConfig-ThresholdPaillier"></a>
-
-### HomomorphicEncryptionConfig.ThresholdPaillier
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key_size | [int32](#int32) |  |  |
-| public_key | [string](#string) |  |  |
-
-
-
-
-
-
 <a name="config-InputConfig"></a>
 
 ### InputConfig
@@ -214,7 +244,7 @@ FEATURES
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | valid_count_fields | [string](#string) | repeated |  |
-| valid_aggregated_count_fields | [string](#string) | repeated |  |
+| valid_grouped_count_fields | [string](#string) | repeated |  |
 | valid_average_fields | [string](#string) | repeated |  |
 
 
@@ -279,7 +309,23 @@ QUERY
 | ----- | ---- | ----- | ----------- |
 | input_config | [InputConfig](#config-InputConfig) |  |  |
 | differential_privacy_config | [DifferentialPrivacyConfig](#config-DifferentialPrivacyConfig) |  |  |
-| homomorphic_encryption_config | [HomomorphicEncryptionConfig](#config-HomomorphicEncryptionConfig) |  |  |
+| encryption_config | [EncryptionConfig](#config-EncryptionConfig) |  |  |
+
+
+
+
+
+
+<a name="config-ReadPlatformConfigResponse"></a>
+
+### ReadPlatformConfigResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| platform_config | [PlatformConfig](#config-PlatformConfig) |  |  |
+| encryption_version | [string](#string) |  |  |
 
 
 
@@ -500,7 +546,7 @@ QUERY
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | count_result | [int32](#int32) |  |  |
-| aggregated_count_result | [QueryResult.AggregatedCount](#query-QueryResult-AggregatedCount) |  |  |
+| grouped_count_result | [QueryResult.GroupedCount](#query-QueryResult-GroupedCount) |  |  |
 | average_result | [double](#double) |  |  |
 | error | [common.ChaincodeError](#common-ChaincodeError) |  |  |
 
@@ -509,24 +555,24 @@ QUERY
 
 
 
-<a name="query-QueryResult-AggregatedCount"></a>
+<a name="query-QueryResult-GroupedCount"></a>
 
-### QueryResult.AggregatedCount
+### QueryResult.GroupedCount
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| map | [QueryResult.AggregatedCount.MapEntry](#query-QueryResult-AggregatedCount-MapEntry) | repeated |  |
+| map | [QueryResult.GroupedCount.MapEntry](#query-QueryResult-GroupedCount-MapEntry) | repeated |  |
 
 
 
 
 
 
-<a name="query-QueryResult-AggregatedCount-MapEntry"></a>
+<a name="query-QueryResult-GroupedCount-MapEntry"></a>
 
-### QueryResult.AggregatedCount.MapEntry
+### QueryResult.GroupedCount.MapEntry
 
 
 
@@ -549,7 +595,7 @@ QUERY
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | submitter | [string](#string) |  |  |
-| query_type | [string](#string) |  |  |
+| query_type | [QueryTransaction.QueryType](#query-QueryTransaction-QueryType) |  |  |
 | field | [string](#string) |  |  |
 | filters | [Filter](#query-Filter) | repeated |  |
 
@@ -626,57 +672,9 @@ QUERY
 | ---- | ------ | ----------- |
 | QUERY_TYPE_UNSPECIFIED | 0 |  |
 | QUERY_TYPE_COUNT | 1 |  |
-| QUERY_TYPE_AGGREGATED_COUNT | 2 |  |
+| QUERY_TYPE_GROUPED_COUNT | 2 |  |
 | QUERY_TYPE_AVERAGE | 3 |  |
 
-
- 
-
- 
-
- 
-
-
-
-<a name="transaction_transaction-proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## transaction/transaction.proto
-
-
-
-<a name="transaction-EvaluateTransaction"></a>
-
-### EvaluateTransaction
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| read_platform_config_transaction | [config.ReadPlatformConfigTransaction](#config-ReadPlatformConfigTransaction) |  |  |
-
-
-
-
-
-
-<a name="transaction-SubmitTransaction"></a>
-
-### SubmitTransaction
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| query_transaction | [query.QueryTransaction](#query-QueryTransaction) |  |  |
-| device_data_transaction | [devicedata.DeviceDataTransaction](#devicedata-DeviceDataTransaction) |  |  |
-| write_platform_config_transaction | [config.WritePlatformConfigTransaction](#config-WritePlatformConfigTransaction) |  |  |
-
-
-
-
-
- 
 
  
 
