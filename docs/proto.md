@@ -180,7 +180,7 @@ AUDITING
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | enabled | [bool](#bool) |  |  |
-| epsilon | [int32](#int32) |  |  |
+| epsilon | [double](#double) |  |  |
 
 
 
@@ -213,6 +213,7 @@ AUDITING
 | ----- | ---- | ----- | ----------- |
 | key_size | [int32](#int32) |  |  |
 | public_key | [string](#string) |  |  |
+| trusted_third_party_endpoint | [string](#string) |  |  |
 
 
 

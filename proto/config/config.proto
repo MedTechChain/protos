@@ -43,13 +43,14 @@ message InputConfig {
 
 message DifferentialPrivacyConfig {
   bool enabled = 1;
-  int32 epsilon = 2;
+  double epsilon = 2;
 }
 
 message EncryptionConfig {
   message Paillier {
     int32 key_size = 1;
     string public_key = 2;
+    string trusted_third_party_endpoint = 3;
   }
 
   bool enabled = 1;
