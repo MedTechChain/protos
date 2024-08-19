@@ -6,37 +6,96 @@ package devicedata;
 
 option java_package = "nl.medtechchain.proto.devicedata";
 
-message DeviceDataTransaction {
+message DeviceDataAsset {
   enum DeviceCategory {
     DEVICE_CATEGORY_UNSPECIFIED = 0;
     DEVICE_CATEGORY_PORTABLE = 1;
     DEVICE_CATEGORY_WEARABLE = 2;
   }
 
-  message DeviceData {
-    string udi = 1;
-    string manufacturer = 2;
-    string model = 3;
-    string firmware_version = 4;
-    string device_type = 5;
-    string device_category = 6;
-    string production_date = 7;
-    string last_service_date = 8;
-    string warranty_expiry_date = 9;
-    string usage_hours = 10;
-    string battery_level = 11;
-    string hospital = 12;
-    string speciality = 13;
-    string active_status = 14;
-    string last_sync_time = 15;
-    string sync_frequency = 16;
-    string mac_address = 17;
+  message PlainDeviceData {
+    string manufacturer = 1;
+    string model = 2;
+    string firmware_version = 3;
+    string device_type = 4;
+    DeviceCategory device_category = 5;
+    google.protobuf.Timestamp production_date = 6;
+    google.protobuf.Timestamp last_service_date = 7;
+    google.protobuf.Timestamp warranty_expiry_date = 8;
+    int32 usage_hours = 9;
+    int32 battery_level = 10;
+    bool active_status = 11;
+    google.protobuf.Timestamp last_sync_time = 12;
+    string sync_frequency_seconds = 13;
   }
 
-  string id = 1; // hash of udi
-  google.protobuf.Timestamp timestamp = 2;
-  optional string encryption_version = 3;
-  DeviceData device_data = 4;
+  message SensitiveDeviceData {
+    string udi = 1;
+    string hospital = 2;
+    string speciality = 3;
+  }
+
+  google.protobuf.Timestamp timestamp = 1;
+  optional string encryption_version = 2;
+  PlainDeviceData plain_device_data = 3;
+  SensitiveDeviceData sensitive_device_data = 4;
 }
 
-
+enum MedicalSpeciality {
+  MEDICAL_SPECIALITY_UNSPECIFIED = 0;
+  ALLERGY_AND_IMMUNOLOGY = 1;
+  ANESTHESIOLOGY = 2;
+  DERMATOLOGY = 3;
+  DIAGNOSTIC_RADIOLOGY = 4;
+  EMERGENCY_MEDICINE = 5;
+  FAMILY_MEDICINE = 6;
+  INTERNAL_MEDICINE = 7;
+  MEDICAL_GENETICS = 8;
+  NEUROLOGY = 9;
+  NUCLEAR_MEDICINE = 10;
+  OBSTETRICS_AND_GYNECOLOGY = 11;
+  OPHTHALMOLOGY = 12;
+  PATHOLOGY = 13;
+  PEDIATRICS = 14;
+  PHYSICAL_MEDICINE_AND_REHABILITATION = 15;
+  PREVENTIVE_MEDICINE = 16;
+  PSYCHIATRY = 17;
+  RADIATION_ONCOLOGY = 18;
+  SURGERY = 19;
+  UROLOGY = 20;
+  CARDIOLOGY = 21;
+  ENDOCRINOLOGY = 22;
+  GASTROENTEROLOGY = 23;
+  GERIATRICS = 24;
+  HEMATOLOGY = 25;
+  INFECTIOUS_DISEASE = 26;
+  NEPHROLOGY = 27;
+  ONCOLOGY = 28;
+  PULMONOLOGY = 29;
+  RHEUMATOLOGY = 30;
+  ORTHOPEDICS = 31;
+  OTOLARYNGOLOGY = 32;
+  PLASTIC_SURGERY = 33;
+  VASCULAR_SURGERY = 34;
+  THORACIC_SURGERY = 35;
+  NEUROSURGERY = 36;
+  PODIATRY = 37;
+  DENTISTRY = 38;
+  ORAL_AND_MAXILLOFACIAL_SURGERY = 39;
+  AUDIOLOGY = 40;
+  SPEECH_LANGUAGE_PATHOLOGY = 41;
+  OCCUPATIONAL_THERAPY = 42;
+  PHYSICAL_THERAPY = 43;
+  CHIROPRACTIC = 44;
+  PAIN_MEDICINE = 45;
+  SPORTS_MEDICINE = 46;
+  PALLIATIVE_CARE = 47;
+  PHARMACOLOGY = 48;
+  NUTRITION = 49;
+  MIDWIFERY = 50;
+  NEONATOLOGY = 51;
+  CRITICAL_CARE = 52;
+  HOSPICE_AND_PALLIATIVE_MEDICINE = 53;
+  SLEEP_MEDICINE = 54;
+  CLINICAL_NEUROPHYSIOLOGY = 55;
+}

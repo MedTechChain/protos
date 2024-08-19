@@ -71,7 +71,7 @@ message ReadPlatformConfigTransaction {
 
 message ReadPlatformConfigResponse {
     PlatformConfig platform_config = 1;
-    string encryption_version = 2;
+    optional string encryption_version = 2;
 }
 
 message WritePlatformConfigTransaction {

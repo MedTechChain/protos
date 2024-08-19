@@ -26,10 +26,12 @@
     - [WritePlatformConfigTransaction](#config-WritePlatformConfigTransaction)
   
 - [devicedata/devicedata.proto](#devicedata_devicedata-proto)
-    - [DeviceDataTransaction](#devicedata-DeviceDataTransaction)
-    - [DeviceDataTransaction.DeviceData](#devicedata-DeviceDataTransaction-DeviceData)
+    - [DeviceDataAsset](#devicedata-DeviceDataAsset)
+    - [DeviceDataAsset.PlainDeviceData](#devicedata-DeviceDataAsset-PlainDeviceData)
+    - [DeviceDataAsset.SensitiveDeviceData](#devicedata-DeviceDataAsset-SensitiveDeviceData)
   
-    - [DeviceDataTransaction.DeviceCategory](#devicedata-DeviceDataTransaction-DeviceCategory)
+    - [DeviceDataAsset.DeviceCategory](#devicedata-DeviceDataAsset-DeviceCategory)
+    - [MedicalSpeciality](#devicedata-MedicalSpeciality)
   
 - [query/query.proto](#query_query-proto)
     - [Filter](#query-Filter)
@@ -326,7 +328,7 @@ QUERY
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | platform_config | [PlatformConfig](#config-PlatformConfig) |  |  |
-| encryption_version | [string](#string) |  |  |
+| encryption_version | [string](#string) | optional |  |
 
 
 
@@ -374,49 +376,62 @@ QUERY
 
 
 
-<a name="devicedata-DeviceDataTransaction"></a>
+<a name="devicedata-DeviceDataAsset"></a>
 
-### DeviceDataTransaction
+### DeviceDataAsset
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  | hash of udi |
 | timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
 | encryption_version | [string](#string) | optional |  |
-| device_data | [DeviceDataTransaction.DeviceData](#devicedata-DeviceDataTransaction-DeviceData) |  |  |
+| plain_device_data | [DeviceDataAsset.PlainDeviceData](#devicedata-DeviceDataAsset-PlainDeviceData) |  |  |
+| sensitive_device_data | [DeviceDataAsset.SensitiveDeviceData](#devicedata-DeviceDataAsset-SensitiveDeviceData) |  |  |
 
 
 
 
 
 
-<a name="devicedata-DeviceDataTransaction-DeviceData"></a>
+<a name="devicedata-DeviceDataAsset-PlainDeviceData"></a>
 
-### DeviceDataTransaction.DeviceData
+### DeviceDataAsset.PlainDeviceData
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| manufacturer | [string](#string) |  |  |
+| model | [string](#string) |  |  |
+| firmware_version | [string](#string) |  |  |
+| device_type | [string](#string) |  |  |
+| device_category | [DeviceDataAsset.DeviceCategory](#devicedata-DeviceDataAsset-DeviceCategory) |  |  |
+| production_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+| last_service_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+| warranty_expiry_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+| usage_hours | [int32](#int32) |  |  |
+| battery_level | [int32](#int32) |  |  |
+| active_status | [bool](#bool) |  |  |
+| last_sync_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+| sync_frequency_seconds | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="devicedata-DeviceDataAsset-SensitiveDeviceData"></a>
+
+### DeviceDataAsset.SensitiveDeviceData
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | udi | [string](#string) |  |  |
-| manufacturer | [string](#string) |  |  |
-| model | [string](#string) |  |  |
-| firmware_version | [string](#string) |  |  |
-| device_type | [string](#string) |  |  |
-| device_category | [string](#string) |  |  |
-| production_date | [string](#string) |  |  |
-| last_service_date | [string](#string) |  |  |
-| warranty_expiry_date | [string](#string) |  |  |
-| usage_hours | [string](#string) |  |  |
-| battery_level | [string](#string) |  |  |
 | hospital | [string](#string) |  |  |
 | speciality | [string](#string) |  |  |
-| active_status | [string](#string) |  |  |
-| last_sync_time | [string](#string) |  |  |
-| sync_frequency | [string](#string) |  |  |
-| mac_address | [string](#string) |  |  |
 
 
 
@@ -425,9 +440,9 @@ QUERY
  
 
 
-<a name="devicedata-DeviceDataTransaction-DeviceCategory"></a>
+<a name="devicedata-DeviceDataAsset-DeviceCategory"></a>
 
-### DeviceDataTransaction.DeviceCategory
+### DeviceDataAsset.DeviceCategory
 
 
 | Name | Number | Description |
@@ -435,6 +450,72 @@ QUERY
 | DEVICE_CATEGORY_UNSPECIFIED | 0 |  |
 | DEVICE_CATEGORY_PORTABLE | 1 |  |
 | DEVICE_CATEGORY_WEARABLE | 2 |  |
+
+
+
+<a name="devicedata-MedicalSpeciality"></a>
+
+### MedicalSpeciality
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| MEDICAL_SPECIALITY_UNSPECIFIED | 0 |  |
+| ALLERGY_AND_IMMUNOLOGY | 1 |  |
+| ANESTHESIOLOGY | 2 |  |
+| DERMATOLOGY | 3 |  |
+| DIAGNOSTIC_RADIOLOGY | 4 |  |
+| EMERGENCY_MEDICINE | 5 |  |
+| FAMILY_MEDICINE | 6 |  |
+| INTERNAL_MEDICINE | 7 |  |
+| MEDICAL_GENETICS | 8 |  |
+| NEUROLOGY | 9 |  |
+| NUCLEAR_MEDICINE | 10 |  |
+| OBSTETRICS_AND_GYNECOLOGY | 11 |  |
+| OPHTHALMOLOGY | 12 |  |
+| PATHOLOGY | 13 |  |
+| PEDIATRICS | 14 |  |
+| PHYSICAL_MEDICINE_AND_REHABILITATION | 15 |  |
+| PREVENTIVE_MEDICINE | 16 |  |
+| PSYCHIATRY | 17 |  |
+| RADIATION_ONCOLOGY | 18 |  |
+| SURGERY | 19 |  |
+| UROLOGY | 20 |  |
+| CARDIOLOGY | 21 |  |
+| ENDOCRINOLOGY | 22 |  |
+| GASTROENTEROLOGY | 23 |  |
+| GERIATRICS | 24 |  |
+| HEMATOLOGY | 25 |  |
+| INFECTIOUS_DISEASE | 26 |  |
+| NEPHROLOGY | 27 |  |
+| ONCOLOGY | 28 |  |
+| PULMONOLOGY | 29 |  |
+| RHEUMATOLOGY | 30 |  |
+| ORTHOPEDICS | 31 |  |
+| OTOLARYNGOLOGY | 32 |  |
+| PLASTIC_SURGERY | 33 |  |
+| VASCULAR_SURGERY | 34 |  |
+| THORACIC_SURGERY | 35 |  |
+| NEUROSURGERY | 36 |  |
+| PODIATRY | 37 |  |
+| DENTISTRY | 38 |  |
+| ORAL_AND_MAXILLOFACIAL_SURGERY | 39 |  |
+| AUDIOLOGY | 40 |  |
+| SPEECH_LANGUAGE_PATHOLOGY | 41 |  |
+| OCCUPATIONAL_THERAPY | 42 |  |
+| PHYSICAL_THERAPY | 43 |  |
+| CHIROPRACTIC | 44 |  |
+| PAIN_MEDICINE | 45 |  |
+| SPORTS_MEDICINE | 46 |  |
+| PALLIATIVE_CARE | 47 |  |
+| PHARMACOLOGY | 48 |  |
+| NUTRITION | 49 |  |
+| MIDWIFERY | 50 |  |
+| NEONATOLOGY | 51 |  |
+| CRITICAL_CARE | 52 |  |
+| HOSPICE_AND_PALLIATIVE_MEDICINE | 53 |  |
+| SLEEP_MEDICINE | 54 |  |
+| CLINICAL_NEUROPHYSIOLOGY | 55 |  |
 
 
  
