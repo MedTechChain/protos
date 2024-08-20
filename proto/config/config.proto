@@ -16,7 +16,7 @@ message PlatformConfig {
 message ParticipantConfig {
   message HospitalConfig {
     string name = 1;
-    string peer_endpoint = 2;
+    string application_server_address = 2;
   }
 
   repeated HospitalConfig hospitals_config = 1;
@@ -53,9 +53,9 @@ message DifferentialPrivacyConfig {
 
 message EncryptionConfig {
   message Paillier {
-    int32 key_size = 1;
+    int32 biT_length = 1;
     string public_key = 2;
-    string trusted_third_party_endpoint = 3;
+    string trusted_third_party_address = 3;
   }
 
   oneof scheme {

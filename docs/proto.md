@@ -226,9 +226,9 @@ AUDITING
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| key_size | [int32](#int32) |  |  |
+| biT_length | [int32](#int32) |  |  |
 | public_key | [string](#string) |  |  |
-| trusted_third_party_endpoint | [string](#string) |  |  |
+| trusted_third_party_address | [string](#string) |  |  |
 
 
 
@@ -292,7 +292,7 @@ HOSPITALS NETWORK
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  |  |
-| peer_endpoint | [string](#string) |  |  |
+| application_server_address | [string](#string) |  |  |
 
 
 
