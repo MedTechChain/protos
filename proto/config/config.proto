@@ -42,8 +42,13 @@ message InputConfig {
 }
 
 message DifferentialPrivacyConfig {
-  bool enabled = 1;
-  double epsilon = 2;
+  message Laplace {
+    double epsilon = 1;
+  }
+
+  oneof mechanism {
+    Laplace laplace = 1;
+  };
 }
 
 message EncryptionConfig {
@@ -53,9 +58,8 @@ message EncryptionConfig {
     string trusted_third_party_endpoint = 3;
   }
 
-  bool enabled = 1;
   oneof scheme {
-    Paillier paillier = 2;
+    Paillier paillier = 1;
   };
 }
 
@@ -66,14 +70,7 @@ message AuditableKeyExchangeConfig {
 
 // TRANSACTIONS
 
-message ReadPlatformConfigTransaction {
-}
-
 message ReadPlatformConfigResponse {
     PlatformConfig platform_config = 1;
     optional string encryption_version = 2;
-}
-
-message WritePlatformConfigTransaction {
-  PlatformConfig platform_config = 1;
 }

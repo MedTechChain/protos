@@ -69,7 +69,7 @@ message Filter {
   }
 }
 
-message QueryTransaction {
+message Query {
   enum QueryType {
     QUERY_TYPE_UNSPECIFIED = 0;
     QUERY_TYPE_COUNT = 1;
@@ -94,4 +94,9 @@ message QueryResult {
     double average_result = 3;
     common.ChaincodeError error = 4;
   }
+}
+
+message QueryAsset {
+  Query query = 1;
+  QueryResult result = 2;
 }

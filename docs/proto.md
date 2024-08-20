@@ -13,6 +13,7 @@
 - [config/config.proto](#config_config-proto)
     - [AuditableKeyExchangeConfig](#config-AuditableKeyExchangeConfig)
     - [DifferentialPrivacyConfig](#config-DifferentialPrivacyConfig)
+    - [DifferentialPrivacyConfig.Laplace](#config-DifferentialPrivacyConfig-Laplace)
     - [EncryptionConfig](#config-EncryptionConfig)
     - [EncryptionConfig.Paillier](#config-EncryptionConfig-Paillier)
     - [FeatureConfig](#config-FeatureConfig)
@@ -22,8 +23,6 @@
     - [PlatformConfig](#config-PlatformConfig)
     - [QueryConfig](#config-QueryConfig)
     - [ReadPlatformConfigResponse](#config-ReadPlatformConfigResponse)
-    - [ReadPlatformConfigTransaction](#config-ReadPlatformConfigTransaction)
-    - [WritePlatformConfigTransaction](#config-WritePlatformConfigTransaction)
   
 - [devicedata/devicedata.proto](#devicedata_devicedata-proto)
     - [DeviceDataAsset](#devicedata-DeviceDataAsset)
@@ -39,16 +38,17 @@
     - [Filter.IntFilter](#query-Filter-IntFilter)
     - [Filter.StringFilter](#query-Filter-StringFilter)
     - [Filter.TimestampFilter](#query-Filter-TimestampFilter)
+    - [Query](#query-Query)
+    - [QueryAsset](#query-QueryAsset)
     - [QueryResult](#query-QueryResult)
     - [QueryResult.GroupedCount](#query-QueryResult-GroupedCount)
     - [QueryResult.GroupedCount.MapEntry](#query-QueryResult-GroupedCount-MapEntry)
-    - [QueryTransaction](#query-QueryTransaction)
   
     - [Filter.BoolFilter.BoolOperator](#query-Filter-BoolFilter-BoolOperator)
     - [Filter.IntFilter.IntOperator](#query-Filter-IntFilter-IntOperator)
     - [Filter.StringFilter.StringOperator](#query-Filter-StringFilter-StringOperator)
     - [Filter.TimestampFilter.TimestampOperator](#query-Filter-TimestampFilter-TimestampOperator)
-    - [QueryTransaction.QueryType](#query-QueryTransaction-QueryType)
+    - [Query.QueryType](#query-Query-QueryType)
   
 - [Scalar Value Types](#scalar-value-types)
 
@@ -181,7 +181,21 @@ AUDITING
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
+| laplace | [DifferentialPrivacyConfig.Laplace](#config-DifferentialPrivacyConfig-Laplace) |  |  |
+
+
+
+
+
+
+<a name="config-DifferentialPrivacyConfig-Laplace"></a>
+
+### DifferentialPrivacyConfig.Laplace
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
 | epsilon | [double](#double) |  |  |
 
 
@@ -197,7 +211,6 @@ AUDITING
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
 | paillier | [EncryptionConfig.Paillier](#config-EncryptionConfig-Paillier) |  |  |
 
 
@@ -329,31 +342,6 @@ QUERY
 | ----- | ---- | ----- | ----------- |
 | platform_config | [PlatformConfig](#config-PlatformConfig) |  |  |
 | encryption_version | [string](#string) | optional |  |
-
-
-
-
-
-
-<a name="config-ReadPlatformConfigTransaction"></a>
-
-### ReadPlatformConfigTransaction
-
-
-
-
-
-
-
-<a name="config-WritePlatformConfigTransaction"></a>
-
-### WritePlatformConfigTransaction
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| platform_config | [PlatformConfig](#config-PlatformConfig) |  |  |
 
 
 
@@ -619,6 +607,40 @@ QUERY
 
 
 
+<a name="query-Query"></a>
+
+### Query
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| submitter | [string](#string) |  |  |
+| query_type | [Query.QueryType](#query-Query-QueryType) |  |  |
+| field | [string](#string) |  |  |
+| filters | [Filter](#query-Filter) | repeated |  |
+
+
+
+
+
+
+<a name="query-QueryAsset"></a>
+
+### QueryAsset
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| query | [Query](#query-Query) |  |  |
+| result | [QueryResult](#query-QueryResult) |  |  |
+
+
+
+
+
+
 <a name="query-QueryResult"></a>
 
 ### QueryResult
@@ -662,24 +684,6 @@ QUERY
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
 | value | [int32](#int32) |  |  |
-
-
-
-
-
-
-<a name="query-QueryTransaction"></a>
-
-### QueryTransaction
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| submitter | [string](#string) |  |  |
-| query_type | [QueryTransaction.QueryType](#query-QueryTransaction-QueryType) |  |  |
-| field | [string](#string) |  |  |
-| filters | [Filter](#query-Filter) | repeated |  |
 
 
 
@@ -745,9 +749,9 @@ QUERY
 
 
 
-<a name="query-QueryTransaction-QueryType"></a>
+<a name="query-Query-QueryType"></a>
 
-### QueryTransaction.QueryType
+### Query.QueryType
 
 
 | Name | Number | Description |
