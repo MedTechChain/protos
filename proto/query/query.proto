@@ -17,9 +17,8 @@ message Filter {
       STRING_OPERATOR_ENDS_WITH = 4;
     }
 
-    string field = 1;
-    string value = 2;
-    StringOperator operator = 3;
+    string value = 1;
+    StringOperator operator = 2;
   }
 
   message IntFilter {
@@ -32,9 +31,8 @@ message Filter {
       INT_OPERATOR_LESS_THAN_OR_EQUAL = 5;
     }
 
-    string field = 1;
-    int32 value = 2;
-    IntOperator operator = 3;
+    int64 value = 1;
+    IntOperator operator = 2;
   }
 
   message TimestampFilter {
@@ -45,9 +43,8 @@ message Filter {
       TIMESTAMP_OPERATOR_AFTER = 3;
     }
 
-    string field = 1;
-    google.protobuf.Timestamp value = 2;
-    TimestampOperator operator = 3;
+    google.protobuf.Timestamp value = 1;
+    TimestampOperator operator = 2;
   }
 
   message BoolFilter {
@@ -56,16 +53,16 @@ message Filter {
       BOOL_OPERATOR_EQUALS = 1;
     }
 
-    string field = 1;
-    bool value = 2;
-    BoolOperator operator = 3;
+    bool value = 1;
+    BoolOperator operator = 2;
   }
 
-  oneof filter_type {
-    StringFilter string_filter = 1;
-    IntFilter int_filter = 2;
-    TimestampFilter timestamp_filter = 3;
-    BoolFilter bool_filter = 4;
+  string field = 1;
+  oneof comparator {
+    StringFilter string_filter = 2;
+    IntFilter int_filter = 3;
+    TimestampFilter timestamp_filter = 4;
+    BoolFilter bool_filter = 5;
   }
 }
 

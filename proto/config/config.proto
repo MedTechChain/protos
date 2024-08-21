@@ -53,7 +53,7 @@ message DifferentialPrivacyConfig {
 
 message EncryptionConfig {
   message Paillier {
-    int32 biT_length = 1;
+    int32 bit_length = 1;
     string public_key = 2;
     string trusted_third_party_address = 3;
   }

@@ -30,9 +30,8 @@ message DeviceDataAsset {
   }
 
   message SensitiveDeviceData {
-    string udi = 1;
-    string hospital = 2;
-    string speciality = 3;
+    string hospital = 1;
+    string speciality = 2;
   }
 
   google.protobuf.Timestamp timestamp = 1;

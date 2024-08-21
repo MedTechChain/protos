@@ -226,7 +226,7 @@ AUDITING
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| biT_length | [int32](#int32) |  |  |
+| bit_length | [int32](#int32) |  |  |
 | public_key | [string](#string) |  |  |
 | trusted_third_party_address | [string](#string) |  |  |
 
@@ -417,7 +417,6 @@ QUERY
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| udi | [string](#string) |  |  |
 | hospital | [string](#string) |  |  |
 | speciality | [string](#string) |  |  |
 
@@ -529,6 +528,7 @@ QUERY
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| field | [string](#string) |  |  |
 | string_filter | [Filter.StringFilter](#query-Filter-StringFilter) |  |  |
 | int_filter | [Filter.IntFilter](#query-Filter-IntFilter) |  |  |
 | timestamp_filter | [Filter.TimestampFilter](#query-Filter-TimestampFilter) |  |  |
@@ -547,7 +547,6 @@ QUERY
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| field | [string](#string) |  |  |
 | value | [bool](#bool) |  |  |
 | operator | [Filter.BoolFilter.BoolOperator](#query-Filter-BoolFilter-BoolOperator) |  |  |
 
@@ -564,8 +563,7 @@ QUERY
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| field | [string](#string) |  |  |
-| value | [int32](#int32) |  |  |
+| value | [int64](#int64) |  |  |
 | operator | [Filter.IntFilter.IntOperator](#query-Filter-IntFilter-IntOperator) |  |  |
 
 
@@ -581,7 +579,6 @@ QUERY
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| field | [string](#string) |  |  |
 | value | [string](#string) |  |  |
 | operator | [Filter.StringFilter.StringOperator](#query-Filter-StringFilter-StringOperator) |  |  |
 
@@ -598,7 +595,6 @@ QUERY
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| field | [string](#string) |  |  |
 | value | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
 | operator | [Filter.TimestampFilter.TimestampOperator](#query-Filter-TimestampFilter-TimestampOperator) |  |  |
 
