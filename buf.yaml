@@ -8,6 +8,7 @@ lint:
     - DEFAULT
   except:
     - PACKAGE_VERSION_SUFFIX
+    - ENUM_VALUE_PREFIX
     
 breaking:
   use:

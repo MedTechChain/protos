@@ -1,76 +1,77 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+
 package config;
 
 option java_package = "nl.medtechchain.proto.config";
 
-// Each feature should have a configuration
-// The configuration will be stored on the ledger
-
 message PlatformConfig {
-  ParticipantConfig participant_config = 1;
-  FeatureConfig feature_config = 2;
+  enum Config {
+    CONFIG_UNSPECIFIED = 0;
+
+    // comma separated repeated string -> s1,s2,s3
+    CONFIG_FEATURE_QUERY_INTERFACE_COUNT_FIELDS = 1;
+
+    // comma separated repeated string -> s1,s2,s3
+    CONFIG_FEATURE_QUERY_INTERFACE_GROUPED_COUNT_FIELDS = 2;
+
+    // comma separated repeated string -> s1,s2,s3
+    CONFIG_FEATURE_QUERY_INTERFACE_AVERAGE_FIELDS = 3;
+
+    // none | laplace
+    CONFIG_FEATURE_QUERY_DIFFERENTIAL_PRIVACY = 4;
+
+    // double
+    CONFIG_FEATURE_QUERY_DIFFERENTIAL_PRIVACY_LAPLACE_EPSILON = 5;
+
+    // none | paillier
+    CONFIG_FEATURE_QUERY_ENCRYPTION_SCHEME = 6;
+
+    // int
+    CONFIG_FEATURE_QUERY_ENCRYPTION_PAILLIER_BIT_LENGTH = 7;
+
+    // string -> big integer
+    CONFIG_FEATURE_QUERY_ENCRYPTION_PAILLIER_PUBLIC_KEY = 8;
+
+    // string -> hostname:port
+    CONFIG_FEATURE_QUERY_ENCRYPTION_TTP_ADRRESS = 9;
+
+    // boolean
+    CONFIG_FEATURE_AUDITING_KEY_EXCHANGE_ENABLED = 10;
+  }
+
+  message Entry {
+    Config key = 1;
+    string value = 2;
+  }
+
+  google.protobuf.Timestamp timestamp = 1;
+  repeated Entry map = 2;
 }
 
-// HOSPITALS NETWORK
-message ParticipantConfig {
+
+
+message NetworkConfig {
   message HospitalConfig {
-    string name = 1;
-    string application_server_address = 2;
+    enum Config {
+      CONFIG_UNSPECIFIED = 0;
+  
+      // string
+      CONFIG_HOSPITAL_NAME = 1;
+  
+      // string -> hostname:port
+      CONFIG_HOSPITAL_APPLICATION_SERVER_ADDRESS = 2;
+    }
+
+    message Entry {
+      Config key = 1;
+      string value = 2;
+    }
+
+    repeated Entry map = 2;
   }
 
-  repeated HospitalConfig hospitals_config = 1;
-}
-
-// FEATURES
-message FeatureConfig {
-  QueryConfig query_config = 1;
-  AuditableKeyExchangeConfig auditable_key_exchange_config = 2;
-}
-
-// QUERY
-message QueryConfig {
-  InputConfig input_config = 1;
-  DifferentialPrivacyConfig differential_privacy_config = 2;
-  EncryptionConfig encryption_config = 3;
-}
-
-message InputConfig {
-  repeated string valid_count_fields = 1;
-  repeated string valid_grouped_count_fields = 2;
-  repeated string valid_average_fields = 3;
-}
-
-message DifferentialPrivacyConfig {
-  message Laplace {
-    double epsilon = 1;
-  }
-
-  oneof mechanism {
-    Laplace laplace = 1;
-  };
-}
-
-message EncryptionConfig {
-  message Paillier {
-    int32 bit_length = 1;
-    string public_key = 2;
-    string trusted_third_party_address = 3;
-  }
-
-  oneof scheme {
-    Paillier paillier = 1;
-  };
-}
-
-// AUDITING
-message AuditableKeyExchangeConfig {
-  bool enabled = 1;
-}
-
-// TRANSACTIONS
-
-message ReadPlatformConfigResponse {
-    PlatformConfig platform_config = 1;
-    optional string encryption_version = 2;
+  google.protobuf.Timestamp timestamp = 1;
+  repeated HospitalConfig list = 2;
 }
