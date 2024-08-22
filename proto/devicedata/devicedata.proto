@@ -6,38 +6,77 @@ package devicedata;
 
 option java_package = "nl.medtechchain.proto.devicedata";
 
+
 message DeviceDataAsset {
-  enum DeviceCategory {
-    DEVICE_CATEGORY_UNSPECIFIED = 0;
-    DEVICE_CATEGORY_PORTABLE = 1;
-    DEVICE_CATEGORY_WEARABLE = 2;
+  message IntegerField {
+    oneof field {
+      int64 plain = 1;
+      string encrypted = 2;
+    }
   }
 
-  message PlainDeviceData {
-    string manufacturer = 1;
-    string model = 2;
-    string firmware_version = 3;
-    string device_type = 4;
-    DeviceCategory device_category = 5;
-    google.protobuf.Timestamp production_date = 6;
-    google.protobuf.Timestamp last_service_date = 7;
-    google.protobuf.Timestamp warranty_expiry_date = 8;
-    int32 usage_hours = 9;
-    int32 battery_level = 10;
-    bool active_status = 11;
-    google.protobuf.Timestamp last_sync_time = 12;
-    string sync_frequency_seconds = 13;
+  message StringField {
+    oneof field {
+      string plain = 1;
+      string encrypted = 2;
+    }
   }
 
-  message SensitiveDeviceData {
-    string hospital = 1;
-    string speciality = 2;
+  message BoolField {
+    oneof field {
+      bool plain = 1;
+      string encrypted = 2;
+    }
+  }
+
+  message TimestampField {
+    oneof field {
+      bool plain = 1;
+      string encrypted = 2;
+    }
+  }
+
+  message DeviceCateogryField {
+    oneof field {
+      DeviceCategory plain = 1;
+      string encrypted = 2;
+    }
+  }
+
+  message MedicalSpecialityField {
+    oneof field {
+      MedicalSpeciality plain = 1;
+      string encrypted = 2;
+    }
+  }
+
+  message DeviceData {
+    StringField hospital = 1;
+    StringField manufacturer = 2;
+    StringField model = 3;
+    StringField firmware_version = 4;
+    StringField device_type = 5;
+    TimestampField production_date = 6;
+    TimestampField last_service_date = 7;
+    TimestampField warranty_expiry_date = 8;
+    TimestampField last_sync_time = 9;
+    IntegerField usage_hours = 10;
+    IntegerField battery_level = 11;
+    IntegerField sync_frequency_seconds = 12;
+    BoolField active_status = 13;
+    MedicalSpecialityField field = 14;
+    DeviceCateogryField category = 15;
   }
 
   google.protobuf.Timestamp timestamp = 1;
-  optional string encryption_version = 2;
-  PlainDeviceData plain_device_data = 3;
-  SensitiveDeviceData sensitive_device_data = 4;
+  optional string config_id = 2;
+  DeviceData plain_device_data = 3;
+}
+
+enum DeviceCategory {
+  DEVICE_CATEGORY_UNSPECIFIED = 0;
+  PORTABLE = 1;
+  WEARABLE = 2;
 }
 
 enum MedicalSpeciality {

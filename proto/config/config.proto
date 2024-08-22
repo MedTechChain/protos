@@ -46,11 +46,10 @@ message PlatformConfig {
     string value = 2;
   }
 
-  google.protobuf.Timestamp timestamp = 1;
-  repeated Entry map = 2;
+  string id = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  repeated Entry map = 3;
 }
-
-
 
 message NetworkConfig {
   message HospitalConfig {

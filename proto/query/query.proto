@@ -11,10 +11,10 @@ message Filter {
   message StringFilter {
     enum StringOperator {
       STRING_OPERATOR_UNSPECIFIED = 0;
-      STRING_OPERATOR_EQUALS = 1;
-      STRING_OPERATOR_CONTAINS = 2;
-      STRING_OPERATOR_STARTS_WITH = 3;
-      STRING_OPERATOR_ENDS_WITH = 4;
+      EQUALS = 1;
+      CONTAINS = 2;
+      STARTS_WITH = 3;
+      ENDS_WITH = 4;
     }
 
     string value = 1;
@@ -24,11 +24,11 @@ message Filter {
   message IntFilter {
     enum IntOperator {
       INT_OPERATOR_UNSPECIFIED = 0;
-      INT_OPERATOR_EQUALS = 1;
-      INT_OPERATOR_GREATER_THAN = 2;
-      INT_OPERATOR_LESS_THAN = 3;
-      INT_OPERATOR_GREATER_THAN_OR_EQUAL = 4;
-      INT_OPERATOR_LESS_THAN_OR_EQUAL = 5;
+      EQUALS = 1;
+      GREATER_THAN = 2;
+      LESS_THAN = 3;
+      GREATER_THAN_OR_EQUAL = 4;
+      LESS_THAN_OR_EQUAL = 5;
     }
 
     int64 value = 1;
@@ -38,9 +38,9 @@ message Filter {
   message TimestampFilter {
     enum TimestampOperator {
       TIMESTAMP_OPERATOR_UNSPECIFIED = 0;
-      TIMESTAMP_OPERATOR_EQUALS = 1;
-      TIMESTAMP_OPERATOR_BEFORE = 2;
-      TIMESTAMP_OPERATOR_AFTER = 3;
+      EQUALS = 1;
+      BEFORE = 2;
+      AFTER = 3;
     }
 
     google.protobuf.Timestamp value = 1;
@@ -50,7 +50,7 @@ message Filter {
   message BoolFilter {
     enum BoolOperator {
       BOOL_OPERATOR_UNSPECIFIED = 0;
-      BOOL_OPERATOR_EQUALS = 1;
+      EQUALS = 1;
     }
 
     bool value = 1;
@@ -69,14 +69,14 @@ message Filter {
 message Query {
   enum QueryType {
     QUERY_TYPE_UNSPECIFIED = 0;
-    QUERY_TYPE_COUNT = 1;
-    QUERY_TYPE_GROUPED_COUNT = 2;
-    QUERY_TYPE_AVERAGE = 3;
+    COUNT = 1;
+    GROUPED_COUNT = 2;
+    AVERAGE = 3;
   }
 
   string submitter = 1;
   QueryType query_type = 2;
-  string field = 3;
+  string target_field = 3;
   repeated Filter filters = 4;
 }
 

@@ -11,25 +11,26 @@
     - [ChaincodeError.ErrorCode](#common-ChaincodeError-ErrorCode)
   
 - [config/config.proto](#config_config-proto)
-    - [AuditableKeyExchangeConfig](#config-AuditableKeyExchangeConfig)
-    - [DifferentialPrivacyConfig](#config-DifferentialPrivacyConfig)
-    - [DifferentialPrivacyConfig.Laplace](#config-DifferentialPrivacyConfig-Laplace)
-    - [EncryptionConfig](#config-EncryptionConfig)
-    - [EncryptionConfig.Paillier](#config-EncryptionConfig-Paillier)
-    - [FeatureConfig](#config-FeatureConfig)
-    - [InputConfig](#config-InputConfig)
-    - [ParticipantConfig](#config-ParticipantConfig)
-    - [ParticipantConfig.HospitalConfig](#config-ParticipantConfig-HospitalConfig)
+    - [NetworkConfig](#config-NetworkConfig)
+    - [NetworkConfig.HospitalConfig](#config-NetworkConfig-HospitalConfig)
+    - [NetworkConfig.HospitalConfig.Entry](#config-NetworkConfig-HospitalConfig-Entry)
     - [PlatformConfig](#config-PlatformConfig)
-    - [QueryConfig](#config-QueryConfig)
-    - [ReadPlatformConfigResponse](#config-ReadPlatformConfigResponse)
+    - [PlatformConfig.Entry](#config-PlatformConfig-Entry)
+  
+    - [NetworkConfig.HospitalConfig.Config](#config-NetworkConfig-HospitalConfig-Config)
+    - [PlatformConfig.Config](#config-PlatformConfig-Config)
   
 - [devicedata/devicedata.proto](#devicedata_devicedata-proto)
     - [DeviceDataAsset](#devicedata-DeviceDataAsset)
-    - [DeviceDataAsset.PlainDeviceData](#devicedata-DeviceDataAsset-PlainDeviceData)
-    - [DeviceDataAsset.SensitiveDeviceData](#devicedata-DeviceDataAsset-SensitiveDeviceData)
+    - [DeviceDataAsset.BoolField](#devicedata-DeviceDataAsset-BoolField)
+    - [DeviceDataAsset.DeviceCateogryField](#devicedata-DeviceDataAsset-DeviceCateogryField)
+    - [DeviceDataAsset.DeviceData](#devicedata-DeviceDataAsset-DeviceData)
+    - [DeviceDataAsset.IntegerField](#devicedata-DeviceDataAsset-IntegerField)
+    - [DeviceDataAsset.MedicalSpecialityField](#devicedata-DeviceDataAsset-MedicalSpecialityField)
+    - [DeviceDataAsset.StringField](#devicedata-DeviceDataAsset-StringField)
+    - [DeviceDataAsset.TimestampField](#devicedata-DeviceDataAsset-TimestampField)
   
-    - [DeviceDataAsset.DeviceCategory](#devicedata-DeviceDataAsset-DeviceCategory)
+    - [DeviceCategory](#devicedata-DeviceCategory)
     - [MedicalSpeciality](#devicedata-MedicalSpeciality)
   
 - [query/query.proto](#query_query-proto)
@@ -71,7 +72,7 @@
 | ----- | ---- | ----- | ----------- |
 | code | [ChaincodeError.ErrorCode](#common-ChaincodeError-ErrorCode) |  |  |
 | message | [string](#string) |  |  |
-| details | [string](#string) |  |  |
+| details | [string](#string) | optional |  |
 
 
 
@@ -102,7 +103,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| message | [string](#string) |  |  |
+| message | [string](#string) | optional |  |
 
 
 
@@ -119,28 +120,28 @@
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | ERROR_CODE_UNSPECIFIED | 0 | Generic errors |
-| ERROR_CODE_INTERNAL_ERROR | 1 |  |
-| ERROR_CODE_INVALID_REQUEST | 2 |  |
-| ERROR_CODE_UNAUTHENTICATED | 100 | Authentication and authorization errors |
-| ERROR_CODE_PERMISSION_DENIED | 101 |  |
-| ERROR_CODE_NOT_FOUND | 200 | Resource errors |
-| ERROR_CODE_ALREADY_EXISTS | 201 |  |
-| ERROR_CODE_TRANSACTION_FAILURE | 300 | Transaction and state errors |
-| ERROR_CODE_STATE_ERROR | 301 |  |
-| ERROR_CODE_INVALID_TRANSACTION | 302 |  |
-| ERROR_CODE_DUPLICATE_TRANSACTION | 303 |  |
-| ERROR_CODE_INVALID_ARGUMENT | 400 | Data errors |
-| ERROR_CODE_DATA_INCONSISTENCY | 401 |  |
-| ERROR_CODE_DATA_VALIDATION_ERROR | 402 |  |
-| ERROR_CODE_NETWORK_FAILURE | 500 | Network and communication errors |
-| ERROR_CODE_PEER_UNAVAILABLE | 501 |  |
-| ERROR_CODE_ORDERER_UNAVAILABLE | 502 |  |
-| ERROR_CODE_TIMEOUT | 503 |  |
-| ERROR_CODE_LEDGER_ERROR | 600 | Ledger errors |
-| ERROR_CODE_COMMIT_FAILURE | 601 |  |
-| ERROR_CODE_READ_FAILURE | 602 |  |
-| ERROR_CODE_WRITE_FAILURE | 603 |  |
-| ERROR_CODE_CUSTOM_ERROR | 1000 | Custom application-specific errors |
+| INTERNAL_ERROR | 1 |  |
+| INVALID_REQUEST | 2 |  |
+| UNAUTHENTICATED | 100 | Authentication and authorization errors |
+| PERMISSION_DENIED | 101 |  |
+| NOT_FOUND | 200 | Resource errors |
+| ALREADY_EXISTS | 201 |  |
+| TRANSACTION_FAILURE | 300 | Transaction and state errors |
+| STATE_ERROR | 301 |  |
+| INVALID_TRANSACTION | 302 |  |
+| DUPLICATE_TRANSACTION | 303 |  |
+| INVALID_ARGUMENT | 400 | Data errors |
+| DATA_INCONSISTENCY | 401 |  |
+| DATA_VALIDATION_ERROR | 402 |  |
+| NETWORK_FAILURE | 500 | Network and communication errors |
+| PEER_UNAVAILABLE | 501 |  |
+| ORDERER_UNAVAILABLE | 502 |  |
+| TIMEOUT | 503 |  |
+| LEDGER_ERROR | 600 | Ledger errors |
+| COMMIT_FAILURE | 601 |  |
+| READ_FAILURE | 602 |  |
+| WRITE_FAILURE | 603 |  |
+| CUSTOM_ERROR | 1000 | Custom application-specific errors |
 
 
  
@@ -158,141 +159,47 @@
 
 
 
-<a name="config-AuditableKeyExchangeConfig"></a>
+<a name="config-NetworkConfig"></a>
 
-### AuditableKeyExchangeConfig
-AUDITING
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| enabled | [bool](#bool) |  |  |
-
-
-
-
-
-
-<a name="config-DifferentialPrivacyConfig"></a>
-
-### DifferentialPrivacyConfig
+### NetworkConfig
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| laplace | [DifferentialPrivacyConfig.Laplace](#config-DifferentialPrivacyConfig-Laplace) |  |  |
+| timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+| list | [NetworkConfig.HospitalConfig](#config-NetworkConfig-HospitalConfig) | repeated |  |
 
 
 
 
 
 
-<a name="config-DifferentialPrivacyConfig-Laplace"></a>
+<a name="config-NetworkConfig-HospitalConfig"></a>
 
-### DifferentialPrivacyConfig.Laplace
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| epsilon | [double](#double) |  |  |
-
-
-
-
-
-
-<a name="config-EncryptionConfig"></a>
-
-### EncryptionConfig
+### NetworkConfig.HospitalConfig
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| paillier | [EncryptionConfig.Paillier](#config-EncryptionConfig-Paillier) |  |  |
+| map | [NetworkConfig.HospitalConfig.Entry](#config-NetworkConfig-HospitalConfig-Entry) | repeated |  |
 
 
 
 
 
 
-<a name="config-EncryptionConfig-Paillier"></a>
+<a name="config-NetworkConfig-HospitalConfig-Entry"></a>
 
-### EncryptionConfig.Paillier
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| bit_length | [int32](#int32) |  |  |
-| public_key | [string](#string) |  |  |
-| trusted_third_party_address | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="config-FeatureConfig"></a>
-
-### FeatureConfig
-FEATURES
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| query_config | [QueryConfig](#config-QueryConfig) |  |  |
-| auditable_key_exchange_config | [AuditableKeyExchangeConfig](#config-AuditableKeyExchangeConfig) |  |  |
-
-
-
-
-
-
-<a name="config-InputConfig"></a>
-
-### InputConfig
+### NetworkConfig.HospitalConfig.Entry
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| valid_count_fields | [string](#string) | repeated |  |
-| valid_grouped_count_fields | [string](#string) | repeated |  |
-| valid_average_fields | [string](#string) | repeated |  |
-
-
-
-
-
-
-<a name="config-ParticipantConfig"></a>
-
-### ParticipantConfig
-HOSPITALS NETWORK
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| hospitals_config | [ParticipantConfig.HospitalConfig](#config-ParticipantConfig-HospitalConfig) | repeated |  |
-
-
-
-
-
-
-<a name="config-ParticipantConfig-HospitalConfig"></a>
-
-### ParticipantConfig.HospitalConfig
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| name | [string](#string) |  |  |
-| application_server_address | [string](#string) |  |  |
+| key | [NetworkConfig.HospitalConfig.Config](#config-NetworkConfig-HospitalConfig-Config) |  |  |
+| value | [string](#string) |  |  |
 
 
 
@@ -307,47 +214,65 @@ HOSPITALS NETWORK
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| participant_config | [ParticipantConfig](#config-ParticipantConfig) |  |  |
-| feature_config | [FeatureConfig](#config-FeatureConfig) |  |  |
+| id | [string](#string) |  |  |
+| timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+| map | [PlatformConfig.Entry](#config-PlatformConfig-Entry) | repeated |  |
 
 
 
 
 
 
-<a name="config-QueryConfig"></a>
+<a name="config-PlatformConfig-Entry"></a>
 
-### QueryConfig
-QUERY
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| input_config | [InputConfig](#config-InputConfig) |  |  |
-| differential_privacy_config | [DifferentialPrivacyConfig](#config-DifferentialPrivacyConfig) |  |  |
-| encryption_config | [EncryptionConfig](#config-EncryptionConfig) |  |  |
-
-
-
-
-
-
-<a name="config-ReadPlatformConfigResponse"></a>
-
-### ReadPlatformConfigResponse
+### PlatformConfig.Entry
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| platform_config | [PlatformConfig](#config-PlatformConfig) |  |  |
-| encryption_version | [string](#string) | optional |  |
+| key | [PlatformConfig.Config](#config-PlatformConfig-Config) |  |  |
+| value | [string](#string) |  |  |
 
 
 
 
 
  
+
+
+<a name="config-NetworkConfig-HospitalConfig-Config"></a>
+
+### NetworkConfig.HospitalConfig.Config
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CONFIG_UNSPECIFIED | 0 |  |
+| CONFIG_HOSPITAL_NAME | 1 | string |
+| CONFIG_HOSPITAL_APPLICATION_SERVER_ADDRESS | 2 | string -&gt; hostname:port |
+
+
+
+<a name="config-PlatformConfig-Config"></a>
+
+### PlatformConfig.Config
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| CONFIG_UNSPECIFIED | 0 |  |
+| CONFIG_FEATURE_QUERY_INTERFACE_COUNT_FIELDS | 1 | comma separated repeated string -&gt; s1,s2,s3 |
+| CONFIG_FEATURE_QUERY_INTERFACE_GROUPED_COUNT_FIELDS | 2 | comma separated repeated string -&gt; s1,s2,s3 |
+| CONFIG_FEATURE_QUERY_INTERFACE_AVERAGE_FIELDS | 3 | comma separated repeated string -&gt; s1,s2,s3 |
+| CONFIG_FEATURE_QUERY_DIFFERENTIAL_PRIVACY | 4 | none | laplace |
+| CONFIG_FEATURE_QUERY_DIFFERENTIAL_PRIVACY_LAPLACE_EPSILON | 5 | double |
+| CONFIG_FEATURE_QUERY_ENCRYPTION_SCHEME | 6 | none | paillier |
+| CONFIG_FEATURE_QUERY_ENCRYPTION_PAILLIER_BIT_LENGTH | 7 | int |
+| CONFIG_FEATURE_QUERY_ENCRYPTION_PAILLIER_PUBLIC_KEY | 8 | string -&gt; big integer |
+| CONFIG_FEATURE_QUERY_ENCRYPTION_TTP_ADRRESS | 9 | string -&gt; hostname:port |
+| CONFIG_FEATURE_AUDITING_KEY_EXCHANGE_ENABLED | 10 | boolean |
+
 
  
 
@@ -373,52 +298,133 @@ QUERY
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
-| encryption_version | [string](#string) | optional |  |
-| plain_device_data | [DeviceDataAsset.PlainDeviceData](#devicedata-DeviceDataAsset-PlainDeviceData) |  |  |
-| sensitive_device_data | [DeviceDataAsset.SensitiveDeviceData](#devicedata-DeviceDataAsset-SensitiveDeviceData) |  |  |
+| config_id | [string](#string) | optional |  |
+| plain_device_data | [DeviceDataAsset.DeviceData](#devicedata-DeviceDataAsset-DeviceData) |  |  |
 
 
 
 
 
 
-<a name="devicedata-DeviceDataAsset-PlainDeviceData"></a>
+<a name="devicedata-DeviceDataAsset-BoolField"></a>
 
-### DeviceDataAsset.PlainDeviceData
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| manufacturer | [string](#string) |  |  |
-| model | [string](#string) |  |  |
-| firmware_version | [string](#string) |  |  |
-| device_type | [string](#string) |  |  |
-| device_category | [DeviceDataAsset.DeviceCategory](#devicedata-DeviceDataAsset-DeviceCategory) |  |  |
-| production_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
-| last_service_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
-| warranty_expiry_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
-| usage_hours | [int32](#int32) |  |  |
-| battery_level | [int32](#int32) |  |  |
-| active_status | [bool](#bool) |  |  |
-| last_sync_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
-| sync_frequency_seconds | [string](#string) |  |  |
-
-
-
-
-
-
-<a name="devicedata-DeviceDataAsset-SensitiveDeviceData"></a>
-
-### DeviceDataAsset.SensitiveDeviceData
+### DeviceDataAsset.BoolField
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| hospital | [string](#string) |  |  |
-| speciality | [string](#string) |  |  |
+| plain | [bool](#bool) |  |  |
+| encrypted | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="devicedata-DeviceDataAsset-DeviceCateogryField"></a>
+
+### DeviceDataAsset.DeviceCateogryField
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| plain | [DeviceCategory](#devicedata-DeviceCategory) |  |  |
+| encrypted | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="devicedata-DeviceDataAsset-DeviceData"></a>
+
+### DeviceDataAsset.DeviceData
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| hospital | [DeviceDataAsset.StringField](#devicedata-DeviceDataAsset-StringField) |  |  |
+| manufacturer | [DeviceDataAsset.StringField](#devicedata-DeviceDataAsset-StringField) |  |  |
+| model | [DeviceDataAsset.StringField](#devicedata-DeviceDataAsset-StringField) |  |  |
+| firmware_version | [DeviceDataAsset.StringField](#devicedata-DeviceDataAsset-StringField) |  |  |
+| device_type | [DeviceDataAsset.StringField](#devicedata-DeviceDataAsset-StringField) |  |  |
+| production_date | [DeviceDataAsset.TimestampField](#devicedata-DeviceDataAsset-TimestampField) |  |  |
+| last_service_date | [DeviceDataAsset.TimestampField](#devicedata-DeviceDataAsset-TimestampField) |  |  |
+| warranty_expiry_date | [DeviceDataAsset.TimestampField](#devicedata-DeviceDataAsset-TimestampField) |  |  |
+| last_sync_time | [DeviceDataAsset.TimestampField](#devicedata-DeviceDataAsset-TimestampField) |  |  |
+| usage_hours | [DeviceDataAsset.IntegerField](#devicedata-DeviceDataAsset-IntegerField) |  |  |
+| battery_level | [DeviceDataAsset.IntegerField](#devicedata-DeviceDataAsset-IntegerField) |  |  |
+| sync_frequency_seconds | [DeviceDataAsset.IntegerField](#devicedata-DeviceDataAsset-IntegerField) |  |  |
+| active_status | [DeviceDataAsset.BoolField](#devicedata-DeviceDataAsset-BoolField) |  |  |
+| field | [DeviceDataAsset.MedicalSpecialityField](#devicedata-DeviceDataAsset-MedicalSpecialityField) |  |  |
+| category | [DeviceDataAsset.DeviceCateogryField](#devicedata-DeviceDataAsset-DeviceCateogryField) |  |  |
+
+
+
+
+
+
+<a name="devicedata-DeviceDataAsset-IntegerField"></a>
+
+### DeviceDataAsset.IntegerField
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| plain | [int64](#int64) |  |  |
+| encrypted | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="devicedata-DeviceDataAsset-MedicalSpecialityField"></a>
+
+### DeviceDataAsset.MedicalSpecialityField
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| plain | [MedicalSpeciality](#devicedata-MedicalSpeciality) |  |  |
+| encrypted | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="devicedata-DeviceDataAsset-StringField"></a>
+
+### DeviceDataAsset.StringField
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| plain | [string](#string) |  |  |
+| encrypted | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="devicedata-DeviceDataAsset-TimestampField"></a>
+
+### DeviceDataAsset.TimestampField
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| plain | [bool](#bool) |  |  |
+| encrypted | [string](#string) |  |  |
 
 
 
@@ -427,16 +433,16 @@ QUERY
  
 
 
-<a name="devicedata-DeviceDataAsset-DeviceCategory"></a>
+<a name="devicedata-DeviceCategory"></a>
 
-### DeviceDataAsset.DeviceCategory
+### DeviceCategory
 
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | DEVICE_CATEGORY_UNSPECIFIED | 0 |  |
-| DEVICE_CATEGORY_PORTABLE | 1 |  |
-| DEVICE_CATEGORY_WEARABLE | 2 |  |
+| PORTABLE | 1 |  |
+| WEARABLE | 2 |  |
 
 
 
@@ -613,7 +619,7 @@ QUERY
 | ----- | ---- | ----- | ----------- |
 | submitter | [string](#string) |  |  |
 | query_type | [Query.QueryType](#query-Query-QueryType) |  |  |
-| field | [string](#string) |  |  |
+| target_field | [string](#string) |  |  |
 | filters | [Filter](#query-Filter) | repeated |  |
 
 
@@ -696,7 +702,7 @@ QUERY
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | BOOL_OPERATOR_UNSPECIFIED | 0 |  |
-| BOOL_OPERATOR_EQUALS | 1 |  |
+| EQUALS | 1 |  |
 
 
 
@@ -708,11 +714,11 @@ QUERY
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | INT_OPERATOR_UNSPECIFIED | 0 |  |
-| INT_OPERATOR_EQUALS | 1 |  |
-| INT_OPERATOR_GREATER_THAN | 2 |  |
-| INT_OPERATOR_LESS_THAN | 3 |  |
-| INT_OPERATOR_GREATER_THAN_OR_EQUAL | 4 |  |
-| INT_OPERATOR_LESS_THAN_OR_EQUAL | 5 |  |
+| EQUALS | 1 |  |
+| GREATER_THAN | 2 |  |
+| LESS_THAN | 3 |  |
+| GREATER_THAN_OR_EQUAL | 4 |  |
+| LESS_THAN_OR_EQUAL | 5 |  |
 
 
 
@@ -724,10 +730,10 @@ QUERY
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | STRING_OPERATOR_UNSPECIFIED | 0 |  |
-| STRING_OPERATOR_EQUALS | 1 |  |
-| STRING_OPERATOR_CONTAINS | 2 |  |
-| STRING_OPERATOR_STARTS_WITH | 3 |  |
-| STRING_OPERATOR_ENDS_WITH | 4 |  |
+| EQUALS | 1 |  |
+| CONTAINS | 2 |  |
+| STARTS_WITH | 3 |  |
+| ENDS_WITH | 4 |  |
 
 
 
@@ -739,9 +745,9 @@ QUERY
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | TIMESTAMP_OPERATOR_UNSPECIFIED | 0 |  |
-| TIMESTAMP_OPERATOR_EQUALS | 1 |  |
-| TIMESTAMP_OPERATOR_BEFORE | 2 |  |
-| TIMESTAMP_OPERATOR_AFTER | 3 |  |
+| EQUALS | 1 |  |
+| BEFORE | 2 |  |
+| AFTER | 3 |  |
 
 
 
@@ -753,9 +759,9 @@ QUERY
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | QUERY_TYPE_UNSPECIFIED | 0 |  |
-| QUERY_TYPE_COUNT | 1 |  |
-| QUERY_TYPE_GROUPED_COUNT | 2 |  |
-| QUERY_TYPE_AVERAGE | 3 |  |
+| COUNT | 1 |  |
+| GROUPED_COUNT | 2 |  |
+| AVERAGE | 3 |  |
 
 
  
