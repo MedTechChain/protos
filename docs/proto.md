@@ -270,7 +270,7 @@
 | CONFIG_FEATURE_QUERY_ENCRYPTION_SCHEME | 6 | none | paillier |
 | CONFIG_FEATURE_QUERY_ENCRYPTION_PAILLIER_BIT_LENGTH | 7 | int |
 | CONFIG_FEATURE_QUERY_ENCRYPTION_PAILLIER_PUBLIC_KEY | 8 | string -&gt; big integer |
-| CONFIG_FEATURE_QUERY_ENCRYPTION_TTP_ADRRESS | 9 | string -&gt; hostname:port |
+| CONFIG_FEATURE_QUERY_ENCRYPTION_PAILLIER_TTP_ADRRESS | 9 | string -&gt; hostname:port |
 | CONFIG_FEATURE_AUDITING_KEY_EXCHANGE_ENABLED | 10 | boolean |
 
 
@@ -299,7 +299,7 @@
 | ----- | ---- | ----- | ----------- |
 | timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
 | config_id | [string](#string) | optional |  |
-| plain_device_data | [DeviceDataAsset.DeviceData](#devicedata-DeviceDataAsset-DeviceData) |  |  |
+| device_data | [DeviceDataAsset.DeviceData](#devicedata-DeviceDataAsset-DeviceData) |  |  |
 
 
 
@@ -359,7 +359,7 @@
 | battery_level | [DeviceDataAsset.IntegerField](#devicedata-DeviceDataAsset-IntegerField) |  |  |
 | sync_frequency_seconds | [DeviceDataAsset.IntegerField](#devicedata-DeviceDataAsset-IntegerField) |  |  |
 | active_status | [DeviceDataAsset.BoolField](#devicedata-DeviceDataAsset-BoolField) |  |  |
-| field | [DeviceDataAsset.MedicalSpecialityField](#devicedata-DeviceDataAsset-MedicalSpecialityField) |  |  |
+| speciality | [DeviceDataAsset.MedicalSpecialityField](#devicedata-DeviceDataAsset-MedicalSpecialityField) |  |  |
 | category | [DeviceDataAsset.DeviceCateogryField](#devicedata-DeviceDataAsset-DeviceCateogryField) |  |  |
 
 
@@ -423,7 +423,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| plain | [bool](#bool) |  |  |
+| plain | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
 | encrypted | [string](#string) |  |  |
 
 

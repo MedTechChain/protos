@@ -31,7 +31,7 @@ message DeviceDataAsset {
 
   message TimestampField {
     oneof field {
-      bool plain = 1;
+      google.protobuf.Timestamp plain = 1;
       string encrypted = 2;
     }
   }
@@ -64,13 +64,13 @@ message DeviceDataAsset {
     IntegerField battery_level = 11;
     IntegerField sync_frequency_seconds = 12;
     BoolField active_status = 13;
-    MedicalSpecialityField field = 14;
+    MedicalSpecialityField speciality = 14;
     DeviceCateogryField category = 15;
   }
 
   google.protobuf.Timestamp timestamp = 1;
   optional string config_id = 2;
-  DeviceData plain_device_data = 3;
+  DeviceData device_data = 3;
 }
 
 enum DeviceCategory {
