@@ -21,7 +21,7 @@ message Filter {
     StringOperator operator = 2;
   }
 
-  message IntFilter {
+  message IntegerFilter {
     enum IntOperator {
       INT_OPERATOR_UNSPECIFIED = 0;
       EQUALS = 1;
@@ -57,12 +57,17 @@ message Filter {
     BoolOperator operator = 2;
   }
 
+  message EnumFilter {
+    string value = 1;
+  }
+
   string field = 1;
   oneof comparator {
     StringFilter string_filter = 2;
-    IntFilter int_filter = 3;
+    IntegerFilter integer_filter = 3;
     TimestampFilter timestamp_filter = 4;
     BoolFilter bool_filter = 5;
+    EnumFilter enum_filter = 6;
   }
 }
 

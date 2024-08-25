@@ -16,6 +16,8 @@
     - [NetworkConfig.HospitalConfig.Entry](#config-NetworkConfig-HospitalConfig-Entry)
     - [PlatformConfig](#config-PlatformConfig)
     - [PlatformConfig.Entry](#config-PlatformConfig-Entry)
+    - [UpdateNetworkConfig](#config-UpdateNetworkConfig)
+    - [UpdatePlatformConfig](#config-UpdatePlatformConfig)
   
     - [NetworkConfig.HospitalConfig.Config](#config-NetworkConfig-HospitalConfig-Config)
     - [PlatformConfig.Config](#config-PlatformConfig-Config)
@@ -23,7 +25,7 @@
 - [devicedata/devicedata.proto](#devicedata_devicedata-proto)
     - [DeviceDataAsset](#devicedata-DeviceDataAsset)
     - [DeviceDataAsset.BoolField](#devicedata-DeviceDataAsset-BoolField)
-    - [DeviceDataAsset.DeviceCateogryField](#devicedata-DeviceDataAsset-DeviceCateogryField)
+    - [DeviceDataAsset.DeviceCategoryField](#devicedata-DeviceDataAsset-DeviceCategoryField)
     - [DeviceDataAsset.DeviceData](#devicedata-DeviceDataAsset-DeviceData)
     - [DeviceDataAsset.IntegerField](#devicedata-DeviceDataAsset-IntegerField)
     - [DeviceDataAsset.MedicalSpecialityField](#devicedata-DeviceDataAsset-MedicalSpecialityField)
@@ -36,7 +38,8 @@
 - [query/query.proto](#query_query-proto)
     - [Filter](#query-Filter)
     - [Filter.BoolFilter](#query-Filter-BoolFilter)
-    - [Filter.IntFilter](#query-Filter-IntFilter)
+    - [Filter.EnumFilter](#query-Filter-EnumFilter)
+    - [Filter.IntegerFilter](#query-Filter-IntegerFilter)
     - [Filter.StringFilter](#query-Filter-StringFilter)
     - [Filter.TimestampFilter](#query-Filter-TimestampFilter)
     - [Query](#query-Query)
@@ -46,7 +49,7 @@
     - [QueryResult.GroupedCount.MapEntry](#query-QueryResult-GroupedCount-MapEntry)
   
     - [Filter.BoolFilter.BoolOperator](#query-Filter-BoolFilter-BoolOperator)
-    - [Filter.IntFilter.IntOperator](#query-Filter-IntFilter-IntOperator)
+    - [Filter.IntegerFilter.IntOperator](#query-Filter-IntegerFilter-IntOperator)
     - [Filter.StringFilter.StringOperator](#query-Filter-StringFilter-StringOperator)
     - [Filter.TimestampFilter.TimestampOperator](#query-Filter-TimestampFilter-TimestampOperator)
     - [Query.QueryType](#query-Query-QueryType)
@@ -167,6 +170,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  |  |
 | timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
 | list | [NetworkConfig.HospitalConfig](#config-NetworkConfig-HospitalConfig) | repeated |  |
 
@@ -183,6 +187,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
 | map | [NetworkConfig.HospitalConfig.Entry](#config-NetworkConfig-HospitalConfig-Entry) | repeated |  |
 
 
@@ -238,6 +243,37 @@
 
 
 
+
+<a name="config-UpdateNetworkConfig"></a>
+
+### UpdateNetworkConfig
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| map | [NetworkConfig.HospitalConfig.Entry](#config-NetworkConfig-HospitalConfig-Entry) | repeated |  |
+
+
+
+
+
+
+<a name="config-UpdatePlatformConfig"></a>
+
+### UpdatePlatformConfig
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| map | [PlatformConfig.Entry](#config-PlatformConfig-Entry) | repeated |  |
+
+
+
+
+
  
 
 
@@ -249,8 +285,7 @@
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | CONFIG_UNSPECIFIED | 0 |  |
-| CONFIG_HOSPITAL_NAME | 1 | string |
-| CONFIG_HOSPITAL_APPLICATION_SERVER_ADDRESS | 2 | string -&gt; hostname:port |
+| CONFIG_HOSPITAL_APPLICATION_SERVER_ADDRESS | 1 | string -&gt; hostname:port |
 
 
 
@@ -298,7 +333,7 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | timestamp | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
-| config_id | [string](#string) | optional |  |
+| config_id | [string](#string) |  |  |
 | device_data | [DeviceDataAsset.DeviceData](#devicedata-DeviceDataAsset-DeviceData) |  |  |
 
 
@@ -322,9 +357,9 @@
 
 
 
-<a name="devicedata-DeviceDataAsset-DeviceCateogryField"></a>
+<a name="devicedata-DeviceDataAsset-DeviceCategoryField"></a>
 
-### DeviceDataAsset.DeviceCateogryField
+### DeviceDataAsset.DeviceCategoryField
 
 
 
@@ -360,7 +395,7 @@
 | sync_frequency_seconds | [DeviceDataAsset.IntegerField](#devicedata-DeviceDataAsset-IntegerField) |  |  |
 | active_status | [DeviceDataAsset.BoolField](#devicedata-DeviceDataAsset-BoolField) |  |  |
 | speciality | [DeviceDataAsset.MedicalSpecialityField](#devicedata-DeviceDataAsset-MedicalSpecialityField) |  |  |
-| category | [DeviceDataAsset.DeviceCateogryField](#devicedata-DeviceDataAsset-DeviceCateogryField) |  |  |
+| category | [DeviceDataAsset.DeviceCategoryField](#devicedata-DeviceDataAsset-DeviceCategoryField) |  |  |
 
 
 
@@ -536,9 +571,10 @@
 | ----- | ---- | ----- | ----------- |
 | field | [string](#string) |  |  |
 | string_filter | [Filter.StringFilter](#query-Filter-StringFilter) |  |  |
-| int_filter | [Filter.IntFilter](#query-Filter-IntFilter) |  |  |
+| integer_filter | [Filter.IntegerFilter](#query-Filter-IntegerFilter) |  |  |
 | timestamp_filter | [Filter.TimestampFilter](#query-Filter-TimestampFilter) |  |  |
 | bool_filter | [Filter.BoolFilter](#query-Filter-BoolFilter) |  |  |
+| enum_filter | [Filter.EnumFilter](#query-Filter-EnumFilter) |  |  |
 
 
 
@@ -561,16 +597,31 @@
 
 
 
-<a name="query-Filter-IntFilter"></a>
+<a name="query-Filter-EnumFilter"></a>
 
-### Filter.IntFilter
+### Filter.EnumFilter
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| value | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="query-Filter-IntegerFilter"></a>
+
+### Filter.IntegerFilter
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | value | [int64](#int64) |  |  |
-| operator | [Filter.IntFilter.IntOperator](#query-Filter-IntFilter-IntOperator) |  |  |
+| operator | [Filter.IntegerFilter.IntOperator](#query-Filter-IntegerFilter-IntOperator) |  |  |
 
 
 
@@ -706,9 +757,9 @@
 
 
 
-<a name="query-Filter-IntFilter-IntOperator"></a>
+<a name="query-Filter-IntegerFilter-IntOperator"></a>
 
-### Filter.IntFilter.IntOperator
+### Filter.IntegerFilter.IntOperator
 
 
 | Name | Number | Description |

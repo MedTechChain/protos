@@ -51,16 +51,17 @@ message PlatformConfig {
   repeated Entry map = 3;
 }
 
+message UpdatePlatformConfig {
+  repeated PlatformConfig.Entry map = 3;
+}
+
 message NetworkConfig {
   message HospitalConfig {
     enum Config {
       CONFIG_UNSPECIFIED = 0;
   
-      // string
-      CONFIG_HOSPITAL_NAME = 1;
-  
       // string -> hostname:port
-      CONFIG_HOSPITAL_APPLICATION_SERVER_ADDRESS = 2;
+      CONFIG_HOSPITAL_APPLICATION_SERVER_ADDRESS = 1;
     }
 
     message Entry {
@@ -68,9 +69,17 @@ message NetworkConfig {
       string value = 2;
     }
 
+    string name = 1;
     repeated Entry map = 2;
   }
 
-  google.protobuf.Timestamp timestamp = 1;
-  repeated HospitalConfig list = 2;
+  string id = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  repeated HospitalConfig list = 3;
+}
+
+
+message UpdateNetworkConfig {
+  string name = 1;
+  repeated NetworkConfig.HospitalConfig.Entry map = 2;
 }

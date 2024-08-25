@@ -36,7 +36,7 @@ message DeviceDataAsset {
     }
   }
 
-  message DeviceCateogryField {
+  message DeviceCategoryField {
     oneof field {
       DeviceCategory plain = 1;
       string encrypted = 2;
@@ -65,11 +65,11 @@ message DeviceDataAsset {
     IntegerField sync_frequency_seconds = 12;
     BoolField active_status = 13;
     MedicalSpecialityField speciality = 14;
-    DeviceCateogryField category = 15;
+    DeviceCategoryField category = 15;
   }
 
   google.protobuf.Timestamp timestamp = 1;
-  optional string config_id = 2;
+  string config_id = 2;
   DeviceData device_data = 3;
 }
 
