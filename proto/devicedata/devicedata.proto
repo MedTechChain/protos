@@ -73,6 +73,16 @@ message DeviceDataAsset {
   DeviceData device_data = 3;
 }
 
+enum DeviceDataFieldType {
+  DEVICE_DATA_FIELD_TYPE_UNSPECIFIED = 0;
+  STRING = 1;
+  TIMESTAMP = 2;
+  INTEGER = 3;
+  BOOL = 4;
+  DEVICE_CATEGORY = 5;
+  MEDICAL_SPECIALITY = 6;
+}
+
 enum DeviceCategory {
   DEVICE_CATEGORY_UNSPECIFIED = 0;
   PORTABLE = 1;

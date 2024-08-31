@@ -33,6 +33,7 @@
     - [DeviceDataAsset.TimestampField](#devicedata-DeviceDataAsset-TimestampField)
   
     - [DeviceCategory](#devicedata-DeviceCategory)
+    - [DeviceDataFieldType](#devicedata-DeviceDataFieldType)
     - [MedicalSpeciality](#devicedata-MedicalSpeciality)
   
 - [query/query.proto](#query_query-proto)
@@ -480,6 +481,23 @@
 | DEVICE_CATEGORY_UNSPECIFIED | 0 |  |
 | PORTABLE | 1 |  |
 | WEARABLE | 2 |  |
+
+
+
+<a name="devicedata-DeviceDataFieldType"></a>
+
+### DeviceDataFieldType
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| DEVICE_DATA_FIELD_TYPE_UNSPECIFIED | 0 |  |
+| STRING | 1 |  |
+| TIMESTAMP | 2 |  |
+| INTEGER | 3 |  |
+| BOOL | 4 |  |
+| DEVICE_CATEGORY | 5 |  |
+| MEDICAL_SPECIALITY | 6 |  |
 
 
 
