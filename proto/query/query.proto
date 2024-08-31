@@ -87,11 +87,11 @@ message Query {
 
 message QueryResult {
   message GroupedCount {
-    map<string, int32> map = 1;
+    map<string, int64> map = 1;
   }
 
   oneof result_type {
-    int32 count_result = 1;
+    int64 count_result = 1;
     GroupedCount grouped_count_result = 2;
     double average_result = 3;
     common.ChaincodeError error = 4;
@@ -101,4 +101,16 @@ message QueryResult {
 message QueryAsset {
   Query query = 1;
   QueryResult result = 2;
+}
+
+message ReadQueryAssetPage {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+
+message QueryAssetPage {
+  int32 page_number = 1;
+  int32 page_size = 2;
+  repeated QueryAsset assets = 3;
 }

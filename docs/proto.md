@@ -44,9 +44,11 @@
     - [Filter.TimestampFilter](#query-Filter-TimestampFilter)
     - [Query](#query-Query)
     - [QueryAsset](#query-QueryAsset)
+    - [QueryAssetPage](#query-QueryAssetPage)
     - [QueryResult](#query-QueryResult)
     - [QueryResult.GroupedCount](#query-QueryResult-GroupedCount)
     - [QueryResult.GroupedCount.MapEntry](#query-QueryResult-GroupedCount-MapEntry)
+    - [ReadQueryAssetPage](#query-ReadQueryAssetPage)
   
     - [Filter.BoolFilter.BoolOperator](#query-Filter-BoolFilter-BoolOperator)
     - [Filter.IntegerFilter.IntOperator](#query-Filter-IntegerFilter-IntOperator)
@@ -694,6 +696,23 @@
 
 
 
+<a name="query-QueryAssetPage"></a>
+
+### QueryAssetPage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| page_number | [int32](#int32) |  |  |
+| page_size | [int32](#int32) |  |  |
+| assets | [QueryAsset](#query-QueryAsset) | repeated |  |
+
+
+
+
+
+
 <a name="query-QueryResult"></a>
 
 ### QueryResult
@@ -702,7 +721,7 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| count_result | [int32](#int32) |  |  |
+| count_result | [int64](#int64) |  |  |
 | grouped_count_result | [QueryResult.GroupedCount](#query-QueryResult-GroupedCount) |  |  |
 | average_result | [double](#double) |  |  |
 | error | [common.ChaincodeError](#common-ChaincodeError) |  |  |
@@ -736,7 +755,23 @@
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | key | [string](#string) |  |  |
-| value | [int32](#int32) |  |  |
+| value | [int64](#int64) |  |  |
+
+
+
+
+
+
+<a name="query-ReadQueryAssetPage"></a>
+
+### ReadQueryAssetPage
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| page_number | [int32](#int32) |  |  |
+| page_size | [int32](#int32) |  |  |
 
 
 
