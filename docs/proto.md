@@ -674,6 +674,8 @@
 | query_type | [Query.QueryType](#query-Query-QueryType) |  |  |
 | target_field | [string](#string) |  |  |
 | filters | [Filter](#query-Filter) | repeated |  |
+| start_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+| end_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
 
 
 

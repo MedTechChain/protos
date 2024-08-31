@@ -83,6 +83,8 @@ message Query {
   QueryType query_type = 2;
   string target_field = 3;
   repeated Filter filters = 4;
+  google.protobuf.Timestamp start_time = 5;
+  google.protobuf.Timestamp end_time = 6; 
 }
 
 message QueryResult {
