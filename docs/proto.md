@@ -690,6 +690,8 @@
 | ----- | ---- | ----- | ----------- |
 | query | [Query](#query-Query) |  |  |
 | result | [QueryResult](#query-QueryResult) |  |  |
+| request_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+| response_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
 
 
 
